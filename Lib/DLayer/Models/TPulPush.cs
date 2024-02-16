@@ -26,4 +26,6 @@ public partial class TPulPush
     public string? Label { get; set; }
 
     public long? FromBank { get; set; }
+
+    public long? Bank { get; set; }
 }

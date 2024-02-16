@@ -35,7 +35,7 @@ namespace BLayer.Logics
         /// 三井住友銀行のダウンロードファイルを読み込むAPI
         /// </summary>
         /// <returns></returns>
-        public List<IPullPush> LosdMituiFile()
+        public List<IPullPush> LoadMituiFile()
         {
             DateTime buf = new DateTime();
             List<IPullPush> ret = new List<IPullPush>();
@@ -71,12 +71,18 @@ namespace BLayer.Logics
                     data.Pull = string.IsNullOrEmpty(records[Consts.FL.MITUI.PULL]) ? 0 : Convert.ToInt64(records[Consts.FL.MITUI.PULL]);
                     //お預入れ
                     data.Push = string.IsNullOrEmpty(records[Consts.FL.MITUI.PUSH]) ? 0 : Convert.ToInt64(records[Consts.FL.MITUI.PUSH]);
+                    //取引内容
+                    data.Content= records[Consts.FL.MITUI.CONTENT];
+
                     //メモ
                     data.Memo = records[Consts.FL.MITUI.MEMO];
                     //ラベル
                     data.Label = records[Consts.FL.MITUI.LABEL];
-
+                    //銀行から来たデータ
                     data.FromBank = Consts.Kbn.FromBankKbn.FromBank;
+                    //銀行
+                    data.Bank = Consts.Kbn.Bank.MITUI;
+
                     //リストに登録する
                     ret.Add(data);
                 }           

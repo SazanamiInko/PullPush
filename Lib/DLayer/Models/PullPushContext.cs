@@ -15,6 +15,8 @@ public partial class PullPushContext : DbContext
     {
     }
 
+    public virtual DbSet<MBank> MBanks { get; set; }
+
     public virtual DbSet<MSubject> MSubjects { get; set; }
 
     public virtual DbSet<TPulPush> TPulPushes { get; set; }
@@ -27,6 +29,13 @@ public partial class PullPushContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<MBank>(entity =>
+        {
+            entity.ToTable("M_Bank");
+
+            entity.Property(e => e.Id).HasColumnName("ID");
+        });
+
         modelBuilder.Entity<MSubject>(entity =>
         {
             entity.ToTable("M_Subject");

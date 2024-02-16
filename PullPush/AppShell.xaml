@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+	x:Class="PullPush.AppShell"
+	xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+	xmlns:views="clr-namespace:PullPush.Views"
+	xmlns:local="clr-namespace:PullPush">
+
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="Main"
+		Icon="iconblank.png"
+		ContentTemplate="{DataTemplate views:MainPage}"
+		Route="MainPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="科目一覧"
+		Icon="iconlistdetail.png"
+		ContentTemplate="{DataTemplate views:SubjectListPage}"
+		Route="SubjectListPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="取引内容科目紐づけ一覧"
+		Icon="iconlistdetail.png"
+		ContentTemplate="{DataTemplate views:ContentLinkListPage}"
+		Route="ContentLinkListPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="科目追加"
+		Icon="iconblank.png"
+		ContentTemplate="{DataTemplate views:SubjectAdPage}"
+		Route="SubjectAdPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="取引内容科目紐づけ一覧追加"
+		Icon="iconblank.png"
+		ContentTemplate="{DataTemplate views:ContentLinkAddPage}"
+		Route="ContentLinkAddPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="入出金データ編集"
+		Icon="iconblank.png"
+		ContentTemplate="{DataTemplate views:PullPushEditPage}"
+		Route="PullPushEditPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="入出金データ追加"
+		Icon="iconblank.png"
+		ContentTemplate="{DataTemplate views:PullPushAddPage}"
+		Route="PullPushAddPage" />
+	<ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="入出金データ一覧"
+		Icon="iconlistdetail.png"
+		ContentTemplate="{DataTemplate views:PullPushListPage}"
+		Route="PullPushListPage" />
+</Shell>

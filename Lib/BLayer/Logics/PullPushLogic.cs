@@ -41,6 +41,31 @@ namespace BLayer.Logics
 
         }
 
+
+        public int InsertPullPushs(List<IPullPush> pullPushs)
+        {
+            int cun=0;
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<IPullPush, TPulPush>(); });
+            Mapper map = new Mapper(config);
+            try
+            {
+                foreach (var pullPush in pullPushs)
+                {
+                    var record = map.Map<TPulPush>(pullPush);
+                    this.pContext.Add(record);
+                    cun++;
+                }
+
+                this.pContext.SaveChanges();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            return cun;
+        }
+
         /// <summary>
         /// 引き出し・預け入れ情報を取得するAPI
         /// </summary>

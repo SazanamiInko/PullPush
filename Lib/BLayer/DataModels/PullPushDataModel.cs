@@ -11,7 +11,8 @@ namespace BLayer.DataModels
     /// 引き出し/預け入れ情報
     /// </summary>
     public class PullPushDataModel : IPullPush
-    { /// <summary>
+    { 
+        /// <summary>
       /// 管理番号
       /// </summary>
         public long Id { get; set; }
@@ -60,5 +61,9 @@ namespace BLayer.DataModels
         /// 銀行フラグ
         /// </summary>
         public long FromBank { get; set; }
+        /// <summary>
+        /// 銀行
+        /// </summary>
+        public long Bank { get; set; }
     }
 }

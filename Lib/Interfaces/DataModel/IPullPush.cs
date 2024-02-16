@@ -60,5 +60,10 @@ namespace Interfaces.DataModel
         /// 銀行フラグ
         /// </summary>
         public long FromBank { get; set; }
+
+        /// <summary>
+        /// 銀行
+        /// </summary>
+        public long Bank { get; set; }
     }
 }

@@ -30,6 +30,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FLayer", "Lib\FLayer\FLayer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Interfaces", "Lib\Interfaces\Interfaces.csproj", "{8B273B0A-A886-4A11-9B0F-288D052BAE86}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PullPush", "PullPush\PullPush.csproj", "{229E5D60-6B0A-4EA5-98BC-298B3204842F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -60,6 +62,12 @@ Global
 		{8B273B0A-A886-4A11-9B0F-288D052BAE86}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8B273B0A-A886-4A11-9B0F-288D052BAE86}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8B273B0A-A886-4A11-9B0F-288D052BAE86}.Release|Any CPU.Build.0 = Release|Any CPU
+		{229E5D60-6B0A-4EA5-98BC-298B3204842F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{229E5D60-6B0A-4EA5-98BC-298B3204842F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{229E5D60-6B0A-4EA5-98BC-298B3204842F}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{229E5D60-6B0A-4EA5-98BC-298B3204842F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{229E5D60-6B0A-4EA5-98BC-298B3204842F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{229E5D60-6B0A-4EA5-98BC-298B3204842F}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,6 +82,7 @@ Global
 		{7F28F85A-A5EC-4F40-9418-1FBFD3247F83} = {7BEB5AA8-BC05-4E34-8499-230E0F632FB7}
 		{44160924-9533-42FD-824F-1D2C49B5D6D5} = {7BEB5AA8-BC05-4E34-8499-230E0F632FB7}
 		{8B273B0A-A886-4A11-9B0F-288D052BAE86} = {7BEB5AA8-BC05-4E34-8499-230E0F632FB7}
+		{229E5D60-6B0A-4EA5-98BC-298B3204842F} = {355F0903-8C44-4700-BFBE-59E063BC0A94}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {46C3579E-6838-4809-9B27-E66856E03005}

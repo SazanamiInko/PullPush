@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Common
+﻿namespace Common
 {
     /// <summary>
     /// 定数
@@ -66,6 +60,9 @@ namespace Common
             }
         }
 
+        /// <summary>
+        /// 区分
+        /// </summary>
         public static class Kbn
         {
             /// <summary>
@@ -77,6 +74,17 @@ namespace Common
                 /// 銀行連動データ
                 /// </summary>
                 public const int FromBank = 1;
+            }
+
+            /// <summary>
+            /// 銀行
+            /// </summary>
+            public static class Bank
+            {
+                /// <summary>
+                /// 三井住友銀行
+                /// </summary>
+                public const int MITUI = 1;
             }
         }
     }
