@@ -50,6 +50,12 @@
 	  <PackageReference Include="CommunityToolkit.MVVM" Version="8.1.0" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <ProjectReference Include="..\Lib\Common\Common.csproj" />
+	  <ProjectReference Include="..\Lib\FLayer\FLayer.csproj" />
+	  <ProjectReference Include="..\Lib\Interfaces\Interfaces.csproj" />
+	</ItemGroup>
+
 	<PropertyGroup Label="MauiAppAccelerator">
 		<wizardVersion>v1.2.2</wizardVersion>
 		<projectType>MVVMToolkit</projectType>

@@ -1,14 +1,33 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+<View:BaseViewClass xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
 			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 			 xmlns:vm="clr-namespace:PullPush.ViewModels"
+             xmlns:View="clr-namespace:PullPush.Views"
 			 x:Class="PullPush.Views.SubjectAdPage"
 			 x:DataType="vm:SubjectAdViewModel">
 
-    <StackLayout>
+    <StackLayout Margin="5">
 
-        <Entry Placeholder="科目名"/>
+        <Entry Placeholder="科目名"
+               Text="{Binding Name}"
+               FontSize="16"/>
 
-        <Button Text="登録"/>
+        <HorizontalStackLayout>
+            <RadioButton Content="引出" 
+                         RadioButtonGroup.GroupName="PullPushKbn"
+                         IsChecked="{Binding Pull}"/>
+            <RadioButton Content="預入" 
+                         RadioButtonGroup.GroupName="PullPushKbn"
+                         IsChecked="{Binding Push}"/>
+        </HorizontalStackLayout>
+
+        <HorizontalStackLayout>
+            <CheckBox IsChecked="{Binding InTaxKbn}"/>
+            <Label Text="税対象"/>
+        </HorizontalStackLayout>
+            
+        <Button Text="登録"
+                FontSize="16"
+                Command="{Binding AddCommand}"/>
     </StackLayout>
-</ContentPage>
+</View:BaseViewClass>

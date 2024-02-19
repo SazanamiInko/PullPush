@@ -10,26 +10,8 @@ namespace BLayer.Logics
     /// <summary>
     /// 外部連携ロジック
     /// </summary>
-    public class RenkeiLogic : ILogic
+    public class RenkeiLogic : BasetLogic
     {
-        #region メンバー
-
-        /// <summary>
-        /// コンテキスト
-        /// </summary>
-        private PullPushContext pContext;
-
-        #endregion
-
-        #region プロパティ
-
-        /// <summary>
-        /// コンテキスト
-        /// </summary>
-        public DbContext Context { get; set; }
-
-
-        #endregion
 
         /// <summary>
         /// 三井住友銀行のダウンロードファイルを読み込むAPI

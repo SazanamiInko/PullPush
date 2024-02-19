@@ -1,4 +1,7 @@
-﻿using DLayer.Models;
+﻿using AutoMapper;
+using Common;
+using DLayer.Models;
+using Interfaces.DataModel;
 using Interfaces.Logic;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,27 +17,39 @@ namespace BLayer.Logics
     /// </summary>
     public class SubjectLogic : BasetLogic
     {
-        #region メンバー
 
         /// <summary>
-        /// コンテキスト
+        /// 科目の登録
         /// </summary>
-        private PullPushContext pContext;
+        /// <param name="subject"></param>
+        public void InsertSubject(ISubject subject)
+        {
+          
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<ISubject,MSubject > (); });
+            Mapper map = new Mapper(config);
 
-        #endregion
+            try
+            {
+                //同じ科目名が登録済みの場合はNG
+                var already = pContext.MSubjects.Where(record => record.Name == subject.Name)
+                    .FirstOrDefault();
 
-        #region プロパティ
+                if (already != null)
+                {
+                    throw new BusinessException("既に科目が登録されてました");
+                }
 
-        /// <summary>
-        /// コンテキスト
-        /// </summary>
-        public DbContext Context { get; set; }
+                var record = map.Map<MSubject>(subject);
+                this.pContext.MSubjects.Add(record);
+                this.pContext.SaveChanges();
 
+            }
+            catch (Exception)
+            {
 
-        #endregion
-
-        //科目の登録
-
+                throw;
+            }         
+        }
         //科目の更新
 
         //科目の取得

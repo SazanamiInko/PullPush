@@ -33,6 +33,11 @@ namespace FLayer.APIs
         private static PullPushLogic pullPushLogic;
 
         /// <summary>
+        /// 科目ロジック
+        /// </summary>
+        private static SubjectLogic subjectLogic;
+
+        /// <summary>
         /// ログ
         /// </summary>
         private static Logging logging;
@@ -51,7 +56,8 @@ namespace FLayer.APIs
             renkeiLogic.Context = context;
             pullPushLogic = new PullPushLogic();
             pullPushLogic.Context = context;
-
+            subjectLogic=new SubjectLogic();
+            subjectLogic.Context = context;
             logging = new Logging();
         }
 
@@ -90,7 +96,7 @@ namespace FLayer.APIs
          }
 
        /// <summary>
-       /// 
+       /// 引出預入登録
        /// </summary>
        /// <param name="pullPushs"></param>
        /// <returns></returns>
@@ -110,6 +116,27 @@ namespace FLayer.APIs
 
             return res;
 
+        }
+
+        /// <summary>
+        /// 科目登録
+        /// </summary>
+        /// <param name="subject">科目</param>
+        /// <returns></returns>
+        public static IResponse AddSubject(ISubject subject)
+        {
+
+            CommonResponse res = new CommonResponse();
+            try
+            {
+                subjectLogic.InsertSubject(subject);
+                res.Count = 1;
+            }
+            catch (Exception ex)
+            {
+                res.SetMessage(ex);
+            }
+            return res;
         }
 
         #endregion

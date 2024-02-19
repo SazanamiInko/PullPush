@@ -86,6 +86,38 @@
                 /// </summary>
                 public const int MITUI = 1;
             }
+
+            /// <summary>
+            /// 入出金方向
+            /// </summary>
+            public static class Distans
+            {
+                /// <summary>
+                /// 引出
+                /// </summary>
+                public const int PULL = 0;
+
+                /// <summary>
+                /// 預入
+                /// </summary>
+                public const int PUSH=1; 
+            }
+
+            /// <summary>
+            /// 税対象
+            /// </summary>
+            public static class Tax
+            {
+                /// <summary>
+                /// 対象
+                /// </summary>
+                public const int IN = 1;
+
+                /// <summary>
+                /// 対象外
+                /// </summary>
+                public const int OUT = 0;
+            }
         }
     }
 }

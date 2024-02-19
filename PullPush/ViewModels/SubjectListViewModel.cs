@@ -1,5 +1,8 @@
 ﻿namespace PullPush.ViewModels;
 
+/// <summary>
+/// 科目一覧
+/// </summary>
 public partial class SubjectListViewModel : BaseViewModel
 {
 	readonly SampleDataService dataService;

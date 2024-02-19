@@ -1,15 +1,6 @@
 ﻿using AutoMapper;
 using DLayer.Models;
 using Interfaces.DataModel;
-using Interfaces.Logic;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLayer.Logics
 {
@@ -30,7 +21,7 @@ namespace BLayer.Logics
             try
             {
                 var record = map.Map<TPulPush>(push);
-                this.pContext.Add(record);
+                this.pContext.TPulPushes.Add(record);
                 this.pContext.SaveChanges();
             }
             catch (Exception)
@@ -41,7 +32,11 @@ namespace BLayer.Logics
 
         }
 
-
+        /// <summary>
+        /// 引き出し・預け入れ情報一覧に書き込むAPI
+        /// </summary>
+        /// <param name="pullPushs"></param>
+        /// <returns></returns>
         public int InsertPullPushs(List<IPullPush> pullPushs)
         {
             int cun=0;
@@ -52,7 +47,7 @@ namespace BLayer.Logics
                 foreach (var pullPush in pullPushs)
                 {
                     var record = map.Map<TPulPush>(pullPush);
-                    this.pContext.Add(record);
+                    this.pContext.TPulPushes.Add(record);
                     cun++;
                 }
 
