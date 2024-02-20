@@ -13,19 +13,13 @@
 		Icon="iconblank.png"
 		ContentTemplate="{DataTemplate views:MainPage}"
 		Route="MainPage" />
-	<ShellContent
+    <ShellContent
 		Shell.NavBarIsVisible="true"
 		Title="科目一覧"
 		Icon="iconlistdetail.png"
 		ContentTemplate="{DataTemplate views:SubjectListPage}"
 		Route="SubjectListPage" />
-	<ShellContent
-		Shell.NavBarIsVisible="true"
-		Title="取引内容科目紐づけ一覧"
-		Icon="iconlistdetail.png"
-		ContentTemplate="{DataTemplate views:ContentLinkListPage}"
-		Route="ContentLinkListPage" />
-	<ShellContent
+    <ShellContent
 		Shell.NavBarIsVisible="true"
 		Title="科目追加"
 		Icon="iconblank.png"
@@ -33,10 +27,16 @@
 		Route="SubjectAdPage" />
 	<ShellContent
 		Shell.NavBarIsVisible="true"
-		Title="取引内容科目紐づけ一覧追加"
+		Title="取引科目紐づけルール登録"
 		Icon="iconblank.png"
 		ContentTemplate="{DataTemplate views:ContentLinkAddPage}"
 		Route="ContentLinkAddPage" />
+    <ShellContent
+		Shell.NavBarIsVisible="true"
+		Title="取引科目紐づけルール一覧"
+		Icon="iconlistdetail.png"
+		ContentTemplate="{DataTemplate views:ContentLinkListPage}"
+		Route="ContentLinkListPage" />
 	<ShellContent
 		Shell.NavBarIsVisible="true"
 		Title="入出金データ編集"
