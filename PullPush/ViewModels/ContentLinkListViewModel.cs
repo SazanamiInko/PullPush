@@ -10,7 +10,8 @@ public partial class ContentLinkListViewModel : BaseViewModel
 	[ObservableProperty]
 	ObservableCollection<SampleItem> items;
 
-	public ContentLinkListViewModel(SampleDataService service)
+	public ContentLinkListViewModel(SampleDataService service,
+		             LoggingService logging):base(logging)
 	{
 		dataService = service;
 	}
@@ -18,7 +19,7 @@ public partial class ContentLinkListViewModel : BaseViewModel
 	[RelayCommand]
 	private async void OnRefreshing()
 	{
-		IsRefreshing = true;
+		this.IsRefreshing = true;
 
 		try
 		{
@@ -26,7 +27,7 @@ public partial class ContentLinkListViewModel : BaseViewModel
 		}
 		finally
 		{
-			IsRefreshing = false;
+			this.IsRefreshing = false;
 		}
 	}
 

@@ -34,14 +34,25 @@ public partial class SubjectAdViewModel : BaseViewModel
 	[ObservableProperty]
 	bool inTaxKbn;
 
-	#endregion
 
-	#region コマンド
+    #endregion
 
-	/// <summary>
-	/// 科目登録
-	/// </summary>
-	[RelayCommand]
+    #region コンストラクタ
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="logging"></param>
+    public SubjectAdViewModel(LoggingService logging) : base(logging)
+    {
+    }
+    #endregion
+
+    #region コマンド
+
+    /// <summary>
+    /// 科目登録
+    /// </summary>
+    [RelayCommand]
 	private void Add()
 	{
 		if(string.IsNullOrEmpty(name))
@@ -53,8 +64,8 @@ public partial class SubjectAdViewModel : BaseViewModel
 		SubjectViewDataModel dm = new SubjectViewDataModel()
 		{
 			Name = this.Name,
-			PullPushKbn = Pull ? Consts.Kbn.Distans.PULL : Consts.Kbn.Distans.PUSH,
-			TaxTargetFlg = InTaxKbn ? Consts.Kbn.Tax.IN : Consts.Kbn.Tax.OUT
+			PullPushKbn = this.Pull ? Consts.Kbn.Distans.PULL : Consts.Kbn.Distans.PUSH,
+			TaxTargetFlg = this.InTaxKbn ? Consts.Kbn.Tax.IN : Consts.Kbn.Tax.OUT
 		};
 
 		var result = API.AddSubject(dm);

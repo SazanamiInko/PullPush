@@ -5,4 +5,15 @@ public partial class ContentLinkListDetailViewModel : BaseViewModel
 {
 	[ObservableProperty]
 	SampleItem item;
+
+    #region MyRegion
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="logging"></param>
+    public ContentLinkListDetailViewModel(LoggingService logging) : base(logging)
+    {
+    }
+    #endregion
+
 }

@@ -15,6 +15,29 @@ public partial class BaseViewModel : ObservableObject
     public Action Messageaction { get; set; }
     #endregion
 
+    #region プロパティ
+
+    /// <summary>
+    /// ロギングサービス
+    /// </summary>
+    protected LoggingService Logging { get; set; }
+
+    #endregion
+
+    #region コンストラクタ
+
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="logging"></param>
+    public BaseViewModel(LoggingService logging)
+    {
+        this.Logging = logging;
+    }
+
+
+    #endregion
+
     #region メソッド
 
     /// <summary>

@@ -10,7 +10,7 @@ public partial class PullPushListViewModel : BaseViewModel
 	[ObservableProperty]
 	ObservableCollection<SampleItem> items;
 
-	public PullPushListViewModel(SampleDataService service)
+	public PullPushListViewModel(SampleDataService service,LoggingService logging):base(logging)
 	{
 		dataService = service;
 	}

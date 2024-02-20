@@ -58,6 +58,8 @@ public static class MauiProgram
 
 		builder.Services.AddSingleton<PullPushListPage>();
 
+		builder.Services.AddSingleton<LoggingService>();
+
 		return builder.Build();
 	}
 }

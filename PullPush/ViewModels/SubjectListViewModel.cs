@@ -13,15 +13,15 @@ public partial class SubjectListViewModel : BaseViewModel
 	[ObservableProperty]
 	ObservableCollection<SampleItem> items;
 
-	public SubjectListViewModel(SampleDataService service)
-	{
+	public SubjectListViewModel(SampleDataService service, LoggingService logging) : base(logging)
+    {
 		dataService = service;
 	}
 
 	[RelayCommand]
 	private async void OnRefreshing()
 	{
-		IsRefreshing = true;
+		this.IsRefreshing = true;
 
 		try
 		{
