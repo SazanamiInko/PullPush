@@ -5,11 +5,11 @@
 	xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
 	xmlns:views="clr-namespace:PullPush.Views"
 	xmlns:local="clr-namespace:PullPush"
-    Title="入出金管理">
+    Title="引出預入把握">
 
 	<ShellContent
 		Shell.NavBarIsVisible="true"
-		Title="Main"
+		Title="引出預入把握"
 		Icon="iconblank.png"
 		ContentTemplate="{DataTemplate views:MainPage}"
 		Route="MainPage" />
