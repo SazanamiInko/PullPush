@@ -1,4 +1,6 @@
-﻿namespace PullPush.ViewModels;
+﻿using Common;
+
+namespace PullPush.ViewModels;
 
 public partial class BaseViewModel : ObservableObject
 {
