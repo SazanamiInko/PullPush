@@ -1,4 +1,6 @@
-﻿namespace PullPush.ViewModels;
+﻿using Common;
+
+namespace PullPush.ViewModels;
 
 /// <summary>
 /// 科目一覧

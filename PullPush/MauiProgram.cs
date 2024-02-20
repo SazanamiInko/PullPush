@@ -1,4 +1,6 @@
-﻿namespace PullPush;
+﻿using Common;
+
+namespace PullPush;
 
 public static class MauiProgram
 {

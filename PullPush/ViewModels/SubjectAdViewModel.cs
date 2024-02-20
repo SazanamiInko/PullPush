@@ -1,5 +1,6 @@
 ﻿using Common;
 using FLayer.APIs;
+using NLog;
 
 namespace PullPush.ViewModels;
 
@@ -55,30 +56,42 @@ public partial class SubjectAdViewModel : BaseViewModel
     [RelayCommand]
 	private void Add()
 	{
-		if(string.IsNullOrEmpty(name))
-		{
-            this.DisplayAlert("科目名を入力してください");
-			return;
-        }
-
-		SubjectViewDataModel dm = new SubjectViewDataModel()
-		{
-			Name = this.Name,
-			PullPushKbn = this.Pull ? Consts.Kbn.Distans.PULL : Consts.Kbn.Distans.PUSH,
-			TaxTargetFlg = this.InTaxKbn ? Consts.Kbn.Tax.IN : Consts.Kbn.Tax.OUT
-		};
-
-		var result = API.AddSubject(dm);
-
-		if (result.Success)
-		{
-			this.DisplayAlert("科目を登録しました");
-		}
-		else
-		{
-			this.DisplayAlert("エラー:科目の登録に失敗しました。");
-		}
+        this.Logging.WriteLog(Dummy);
 	}
 
-	#endregion
+    #endregion
+
+    #region メソッド
+
+    private void Dummy() { this.Logging.WriteLog(()=>{ }); }
+
+	private void AddSubject()
+	{
+        if (string.IsNullOrEmpty(name))
+        {
+            this.DisplayAlert("科目名を入力してください");
+            return;
+        }
+
+        SubjectViewDataModel dm = new SubjectViewDataModel()
+        {
+            Name = this.Name,
+            PullPushKbn = this.Pull ? Consts.Kbn.Distans.PULL : Consts.Kbn.Distans.PUSH,
+            TaxTargetFlg = this.InTaxKbn ? Consts.Kbn.Tax.IN : Consts.Kbn.Tax.OUT
+        };
+
+        var result = API.AddSubject(dm);
+
+        if (result.Success)
+        {
+            this.DisplayAlert("科目を登録しました");
+        }
+        else
+        {
+            this.DisplayAlert("エラー:科目の登録に失敗しました。");
+        }
+    }
+
+    #endregion
+
 }

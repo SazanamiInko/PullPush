@@ -1,4 +1,6 @@
-﻿namespace PullPush.ViewModels;
+﻿using Common;
+
+namespace PullPush.ViewModels;
 
 [QueryProperty(nameof(Item), "Item")]
 public partial class PullPushListDetailViewModel : BaseViewModel

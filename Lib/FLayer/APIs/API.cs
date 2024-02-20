@@ -4,8 +4,10 @@ using DLayer.Models;
 using FLayer.Responses;
 using Interfaces.DataModel;
 using Interfaces.Response;
+using Interfaces.Service;
 using Microsoft.Extensions.Logging;
 using NLog.Config;
+using System.Runtime.CompilerServices;
 
 namespace FLayer.APIs
 {
@@ -37,10 +39,7 @@ namespace FLayer.APIs
         /// </summary>
         private static SubjectLogic subjectLogic;
 
-        /// <summary>
-        /// ログ
-        /// </summary>
-        private static Logging logging;
+        private static ILoggerService logging;
 
         #endregion
 
@@ -58,7 +57,7 @@ namespace FLayer.APIs
             pullPushLogic.Context = context;
             subjectLogic=new SubjectLogic();
             subjectLogic.Context = context;
-            logging = new Logging();
+            
         }
 
         #endregion
@@ -66,12 +65,12 @@ namespace FLayer.APIs
         #region API
 
         /// <summary>
-        /// ログ取得
+        /// APIの初期化
         /// </summary>
-        /// <returns></returns>
-        public static LoggingConfiguration CreateLoggingConfiguration()
+        /// <param name="logger"></param>
+        public static void InitializeAPI(ILoggerService logger)
         {
-            return logging.CreateLogFavtory();
+            logger = logger;
         }
 
         /// <summary>
@@ -81,17 +80,18 @@ namespace FLayer.APIs
         public static IResponse LoadMituiFile()
         {
             LoadMituiResponse res =new LoadMituiResponse();
-
-            try
+            logging.WriteLog(() =>
             {
-              var pullpushes=  renkeiLogic.LoadMituiFile();
-                res.PullPushes.AddRange(pullpushes);    
-            }
-            catch (Exception ex)
-            {
-                res.SetMessage(ex);
-            }
-
+                try
+                {
+                    var pullpushes = renkeiLogic.LoadMituiFile();
+                    res.PullPushes.AddRange(pullpushes);
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
+            });
             return res;
          }
 
@@ -103,19 +103,20 @@ namespace FLayer.APIs
         public static IResponse AddPullPush(List<IPullPush> pullPushs)
         {
             CommonResponse res = new CommonResponse();
-
-            try
+            logging.WriteLog(()=>
             {
-                var result = pullPushLogic.InsertPullPushs(pullPushs);
-                res.Count = result;
-            }
-            catch (Exception ex)
-            {
-                res.SetMessage(ex);
-            }
-
+                try
+                {
+                    var result = pullPushLogic.InsertPullPushs(pullPushs);
+                    res.Count = result;
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
+            });
             return res;
-
+           
         }
 
         /// <summary>
@@ -127,7 +128,10 @@ namespace FLayer.APIs
         {
 
             CommonResponse res = new CommonResponse();
-            try
+
+            logging.WriteLog(() =>
+            {
+                try
             {
                 subjectLogic.InsertSubject(subject);
                 res.Count = 1;
@@ -136,6 +140,7 @@ namespace FLayer.APIs
             {
                 res.SetMessage(ex);
             }
+            });
             return res;
         }
 
