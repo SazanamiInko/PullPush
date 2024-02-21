@@ -60,8 +60,6 @@ public partial class PullPushContext : DbContext
         {
             entity.ToTable("T_SubContent");
 
-            entity.HasIndex(e => e.Content, "IX_T_SubContent_Content").IsUnique();
-
             entity.Property(e => e.Id)
                 .ValueGeneratedNever()
                 .HasColumnName("ID");
