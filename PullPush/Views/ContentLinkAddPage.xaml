@@ -4,5 +4,19 @@
 			 xmlns:vm="clr-namespace:PullPush.ViewModels"
 			 x:Class="PullPush.Views.ContentLinkAddPage"
 			 x:DataType="vm:ContentLinkAddViewModel">
+    <!--#region コンテンツ -->
+    
+    <VerticalStackLayout>
+        <Entry Placeholder="ルール名"/>
+        <Entry Placeholder="含む取引名"/>
+
+        <HorizontalStackLayout>
+            <Label Text="科目"/>
+            <Picker/>
+        </HorizontalStackLayout>
+
+        <Button Text="登録"/>
+    </VerticalStackLayout>
+    <!--#endregion-->
 
 </ContentPage>
