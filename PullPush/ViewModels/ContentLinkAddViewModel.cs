@@ -4,6 +4,7 @@ using FLayer.APIs;
 using FLayer.Responses;
 using Interfaces.DataModel;
 using Interfaces.Response;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace PullPush.ViewModels;
 
@@ -34,7 +35,7 @@ public partial class ContentLinkAddViewModel : BaseViewModel
     /// </summary>
     [ObservableProperty]
     string content;
-    
+
     #endregion
 
     #region コンストラクタ
@@ -53,6 +54,16 @@ public partial class ContentLinkAddViewModel : BaseViewModel
 
     #region イベント
 
+    [RelayCommand]
+    public void Add()
+    {
+        Logging.WriteLog(() =>
+        {
+            this.DoAdd();
+        });
+    }
+
+
 
     #endregion
 
@@ -63,19 +74,19 @@ public partial class ContentLinkAddViewModel : BaseViewModel
     /// </summary>
     public void InitializeVM()
     {
-       
+
         var config = new MapperConfiguration(cfg => { cfg.CreateMap<ISubject, SubjectViewDataModel>(); });
         Mapper map = new Mapper(config);
 
         Logging.WriteLog(() => {
             IResponse response = API.GetSubjextItems();
 
-            if(!response.Success)
+            if (!response.Success)
             {
                 return;
             }
 
-            if(response is SubjectResponse)
+            if (response is SubjectResponse)
             {
                 SubjectResponse subres = response as SubjectResponse;
 
@@ -90,6 +101,47 @@ public partial class ContentLinkAddViewModel : BaseViewModel
 
     }
 
+    /// <summary>
+    /// ルールの登録
+    /// </summary>
+    /// <exception cref="NotImplementedException"></exception>
+    private void DoAdd()
+    {
+        if (string.IsNullOrEmpty(Name))
+        {
+            this.DisplayAlert("ルール名を入力してください");
+
+            return;
+        }
+
+        if (string.IsNullOrEmpty(Content))
+        {
+            this.DisplayAlert("取引内容を入力してください");
+
+            return;
+        }
+
+        SubContentViewDataModel record = new SubContentViewDataModel();
+
+        record.Name = this.Name;
+        record.Content = this.Content;
+        record.Subject = SelctedSubhect.Id;
+
+        var res = API.AddSubContent(record);
+
+        if (res.Success)
+        {
+            this.DisplayAlert("ルールを登録しました。");
+
+        }
+        else
+        {
+
+            this.DisplayAlert("ルールを登録に失敗しました。");
+
+
+        }
+    }
     #endregion
 
 }
