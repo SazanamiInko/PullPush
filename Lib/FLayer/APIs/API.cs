@@ -16,7 +16,6 @@ namespace FLayer.APIs
     /// </summary>
     public  class API
     {
-
         #region メンバー
 
         /// <summary>
@@ -39,6 +38,15 @@ namespace FLayer.APIs
         /// </summary>
         private static SubjectLogic subjectLogic;
 
+        /// <summary>
+        /// 取引科目紐づけルールロジック
+        /// </summary>
+        private static SubContentLogic subontentLogic;
+
+
+        /// <summary>
+        /// ロギング
+        /// </summary>
         private static ILoggerService logging;
 
         #endregion
@@ -57,7 +65,8 @@ namespace FLayer.APIs
             pullPushLogic.Context = context;
             subjectLogic=new SubjectLogic();
             subjectLogic.Context = context;
-            
+            subontentLogic = new SubContentLogic();
+            subontentLogic.Context = context;
         }
 
         #endregion
@@ -70,7 +79,7 @@ namespace FLayer.APIs
         /// <param name="logger"></param>
         public static void InitializeAPI(ILoggerService logger)
         {
-            logger = logger;
+            logging = logger;
         }
 
         /// <summary>
@@ -132,18 +141,64 @@ namespace FLayer.APIs
             logging.WriteLog(() =>
             {
                 try
-            {
-                subjectLogic.InsertSubject(subject);
-                res.Count = 1;
-            }
-            catch (Exception ex)
-            {
-                res.SetMessage(ex);
-            }
+                {
+                    subjectLogic.InsertSubject(subject);
+                    res.Count = 1;
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
             });
             return res;
         }
 
-        #endregion
-    }
+        /// <summary>
+        /// 科目一覧取得
+        /// </summary>
+        /// <returns>科目一覧応答</returns>
+        public static IResponse GetSubjextItems()
+        {
+            SubjectResponse res = new SubjectResponse();
+            logging.WriteLog(() =>
+            {
+                try
+                {
+                   var items= subjectLogic.GetSubjectList();
+
+                    items.ForEach(record =>res.Items.Add(record));
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
+            });
+
+            return res;
+        }
+
+        /// <summary>
+        /// ルール紐づけの
+        /// </summary>
+        /// <param name="subContent"></param>
+        /// <returns></returns>
+        public static IResponse AddSubContent(ISubContent subContent)
+        {
+            CommonResponse res = new CommonResponse();
+
+            logging.WriteLog(() =>
+            {
+                try
+                {
+                    res.Count = subontentLogic.InsertSubContent(subContent);
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
+            });
+            return res;
+        }
+            #endregion
+        }
 }

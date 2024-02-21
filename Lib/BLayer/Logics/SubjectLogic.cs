@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BLayer.DataModels;
 using Common;
 using DLayer.Models;
 using Interfaces.DataModel;
@@ -52,8 +53,32 @@ namespace BLayer.Logics
         }
         //科目の更新
 
-        //科目の取得
+        /// <summary>
+        /// 科目の取得
+        /// </summary>
+        /// <returns></returns>
+        public List<ISubject> GetSubjectList()
+        {
+            List<ISubject> ret = new List<ISubject>();
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<MSubject, SubjectDataModel>(); });
+            Mapper map = new Mapper(config);
+            try
+            {
+                pContext.MSubjects.ToList().ForEach
+                    (record =>
+                    {
+                        var item = map.Map<SubjectDataModel>(record);
 
+                        ret.Add(item);
+                    });
+                return ret;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
         //科目の削除
     }
 }

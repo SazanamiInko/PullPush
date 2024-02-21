@@ -55,18 +55,20 @@ public partial class SubjectAdViewModel : BaseViewModel
     [RelayCommand]
 	private void Add()
 	{
-        this.Logging.WriteLog(Dummy);
+        this.Logging.WriteLog(AddSubject);
 	}
 
     #endregion
 
     #region メソッド
 
-    private void Dummy() { this.Logging.WriteLog(()=>{ }); }
-
+    /// <summary>
+    /// 科目登録
+    /// </summary>
 	private void AddSubject()
 	{
-        if (string.IsNullOrEmpty(name))
+        this.Logging.WriteLog(() => {
+            if (string.IsNullOrEmpty(name))
         {
             this.DisplayAlert("科目名を入力してください");
             return;
@@ -89,6 +91,7 @@ public partial class SubjectAdViewModel : BaseViewModel
         {
             this.DisplayAlert("エラー:科目の登録に失敗しました。");
         }
+        });
     }
 
     #endregion

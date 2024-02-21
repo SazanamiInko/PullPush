@@ -12,9 +12,24 @@ namespace BLayer.DataModels
     /// </summary>
     public class SubjectDataModel : ISubject
     {
-        public long Id { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public string Name { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public long PullPushKbn { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public long TaxTargetFlg { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        /// <summary>
+        /// 管理番号
+        /// </summary>
+        public long Id { get; set; }
+       
+        /// <summary>
+        /// 科目名
+        /// </summary>
+        public string Name { get; set; }
+       
+        /// <summary>
+        /// 引出預入区分
+        /// </summary>
+        public long PullPushKbn { get; set; }
+
+        /// <summary>
+        /// 税対象区分
+        /// </summary>
+        public long TaxTargetFlg { get; set; }
     }
 }

@@ -6,13 +6,20 @@
 			 x:DataType="vm:ContentLinkAddViewModel">
     <!--#region コンテンツ -->
     
-    <VerticalStackLayout>
-        <Entry Placeholder="ルール名"/>
-        <Entry Placeholder="含む取引名"/>
+    <VerticalStackLayout Margin="10">
+        <Entry Placeholder="ルール名"
+               Text="{Binding Name}"/>
+        
+        <Entry Placeholder="含む取引名"
+               Text="{Binding Content}"/>
 
         <HorizontalStackLayout>
-            <Label Text="科目"/>
-            <Picker/>
+            <Label Text="科目"
+                   VerticalTextAlignment="Center"/>
+            <Picker ItemsSource="{Binding Subjects}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelctedSubhect}"
+                    />
         </HorizontalStackLayout>
 
         <Button Text="登録"/>
