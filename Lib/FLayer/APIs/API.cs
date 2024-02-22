@@ -194,6 +194,7 @@ namespace FLayer.APIs
                 }
                 catch (Exception ex)
                 {
+                    logging.writeLog(ex);
                     res.SetMessage(ex);
                 }
             });

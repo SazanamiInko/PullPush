@@ -60,9 +60,7 @@ public partial class PullPushContext : DbContext
         {
             entity.ToTable("T_SubContent");
 
-            entity.Property(e => e.Id)
-                .ValueGeneratedNever()
-                .HasColumnName("ID");
+            entity.Property(e => e.Id).HasColumnName("ID");
         });
 
         OnModelCreatingPartial(modelBuilder);

@@ -96,6 +96,11 @@ public partial class ContentLinkAddViewModel : BaseViewModel
                     SubjectViewDataModel item = map.Map<SubjectViewDataModel>(record); ;
                     this.Subjects.Add(item);
                 });
+
+                if (subres.Items.Count>0)
+                {
+                    this.SelctedSubhect = this.Subjects[0];
+                }
             }
         });
 
@@ -121,6 +126,13 @@ public partial class ContentLinkAddViewModel : BaseViewModel
             return;
         }
 
+        if(SelctedSubhect==null)
+        {
+            this.DisplayAlert("科目を選択してください");
+
+            return;
+        }
+
         SubContentViewDataModel record = new SubContentViewDataModel();
 
         record.Name = this.Name;
@@ -136,10 +148,7 @@ public partial class ContentLinkAddViewModel : BaseViewModel
         }
         else
         {
-
-            this.DisplayAlert("ルールを登録に失敗しました。");
-
-
+            this.DisplayAlert(res.Message);
         }
     }
     #endregion

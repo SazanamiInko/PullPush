@@ -3,6 +3,7 @@ using Microsoft.Extensions.Logging;
 using NLog.Config;
 using NLog.Extensions.Logging;
 using NLog.Targets;
+using System;
 using System.Diagnostics;
 
 namespace Common
@@ -85,6 +86,7 @@ namespace Common
             {
                 Logger.LogInformation($"{className} {methodName} Error End");
                 Logger.LogError(ex.Message);
+                Logger.LogError(ex.StackTrace);
             }
         }
 
@@ -104,6 +106,7 @@ namespace Common
         public void writeLog(Exception exception)
         {
             Logger.LogError(exception.Message);
+            Logger.LogError(exception.StackTrace);
         }
         #endregion
     }
