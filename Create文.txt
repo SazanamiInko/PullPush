@@ -1,0 +1,50 @@
+CREATE TABLE sqlite_sequence(name,seq)
+
+CREATE TABLE "M_Subject" (
+[ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+[Name] TEXT,
+[PullFlg] INTEGER,
+[TaxTargetFlg] INTEGER DEFAULT 'false',
+[EnableFlg] INTEGER DEFAULT 'true',
+[DeleteFlg] INTEGER DEFAULT 'false'
+)
+
+CREATE TABLE [M_Bank] (
+[ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+[Name] TEXT
+)
+
+CREATE TABLE [T_PulPush] (
+[ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+[Year] INTEGER,
+[Month] INTEGER,
+[Day] INTEGER,
+[Content] TEXT,
+[Subject] INTEGER,
+[Pull] INTEGER DEFAULT '0',
+[Push] INTEGER DEFAULT '0',
+[Memo] TEXT,
+[Label] TEXT,
+[FromBank] INTEGER DEFAULT 'false',
+[Bank] INTEGER
+)
+
+CREATE TABLE [M_Bank] (
+[ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+[Name] TEXT
+)
+
+CREATE TABLE [T_PulPush] (
+[ID] INTEGER PRIMARY KEY AUTOINCREMENT,
+[Year] INTEGER,
+[Month] INTEGER,
+[Day] INTEGER,
+[Content] TEXT,
+[Subject] INTEGER,
+[Pull] INTEGER DEFAULT '0',
+[Push] INTEGER DEFAULT '0',
+[Memo] TEXT,
+[Label] TEXT,
+[FromBank] INTEGER DEFAULT 'false',
+[Bank] INTEGER
+)

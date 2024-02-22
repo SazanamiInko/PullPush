@@ -17,6 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "B0001", "App\Batch\B0001\B0
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Memo", "Memo", "{5767B035-7BAD-4174-A4A3-729E104807E3}"
 	ProjectSection(SolutionItems) = preProject
+		Create文.txt = Create文.txt
 		Doc\Memo\スキャフォールド.txt = Doc\Memo\スキャフォールド.txt
 	EndProjectSection
 EndProject
