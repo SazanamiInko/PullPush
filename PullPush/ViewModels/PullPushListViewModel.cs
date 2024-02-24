@@ -71,10 +71,10 @@ public partial class PullPushListViewModel : BaseViewModel
 
     /// <summary>
     /// 詳細表示移動
-    /// </summary>
+    /// </summary>D
     /// <param name="item">詳細表示</param>
     [RelayCommand]
-    private async void GoToDetails(SampleItem item)
+    private async void GoToDetails(PullPushViewVuewDataModel item)
     {
         await Shell.Current.GoToAsync(nameof(PullPushListDetailPage), true, new Dictionary<string, object>
         {
@@ -86,7 +86,7 @@ public partial class PullPushListViewModel : BaseViewModel
 
     #region 処理
    /// <summary>
-   /// データセット
+   /// データをセット
    /// </summary>
     private void SetData()
     {

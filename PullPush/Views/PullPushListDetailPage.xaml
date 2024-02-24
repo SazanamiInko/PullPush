@@ -6,8 +6,8 @@
 			 x:DataType="vm:PullPushListDetailViewModel">
 	<ScrollView>
 		<VerticalStackLayout Margin="12">
-			<Label Text="{Binding Item.Title}" FontSize="Header" />
-			<Label Text="{Binding Item.Description}" FontSize="Default" />
+			<Label Text="{Binding Item.Content}" FontSize="Header" />
+			
 		</VerticalStackLayout>
 	</ScrollView>
 </ContentPage>
