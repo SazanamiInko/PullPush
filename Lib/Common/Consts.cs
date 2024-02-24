@@ -90,7 +90,7 @@
             /// <summary>
             /// 入出金方向
             /// </summary>
-            public static class Distans
+            public static class PullPushKbn
             {
                 /// <summary>
                 /// 引出

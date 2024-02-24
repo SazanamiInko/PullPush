@@ -49,5 +49,10 @@
         /// 科目名
         /// </summary>
         public string SubjectName { get; set; }
+
+        /// <summary>
+        /// 引出預入区分
+        /// </summary>
+        public long PullPushKbn { get; set; }
     }
 }

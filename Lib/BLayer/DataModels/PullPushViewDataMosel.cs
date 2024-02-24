@@ -2,6 +2,9 @@
 
 namespace BLayer.DataModels
 {
+    /// <summary>
+    /// 引出預入表示データ
+    /// </summary>
     public class PullPushViewDataMosel: IPullPushView
     {
         /// <summary>
@@ -48,5 +51,10 @@ namespace BLayer.DataModels
         /// 科目名
         /// </summary>
         public string SubjectName { get; set; }
+       
+        /// <summary>
+        /// 引出預入区分
+        /// </summary>
+        public long PullPushKbn { get; set; }
     }
 }

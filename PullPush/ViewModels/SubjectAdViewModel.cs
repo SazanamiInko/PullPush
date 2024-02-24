@@ -77,7 +77,7 @@ public partial class SubjectAdViewModel : BaseViewModel
         SubjectViewDataModel dm = new SubjectViewDataModel()
         {
             Name = this.Name,
-            PullPushKbn = this.Pull ? Consts.Kbn.Distans.PULL : Consts.Kbn.Distans.PUSH,
+            PullPushKbn = this.Pull ? Consts.Kbn.PullPushKbn.PULL : Consts.Kbn.PullPushKbn.PUSH,
             TaxTargetFlg = this.InTaxKbn ? Consts.Kbn.Tax.IN : Consts.Kbn.Tax.OUT
         };
 

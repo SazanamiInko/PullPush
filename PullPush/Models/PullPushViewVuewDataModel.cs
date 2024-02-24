@@ -51,5 +51,7 @@ namespace PullPush.Models
         /// 科目名
         /// </summary>
         public string SubjectName { get; set; }
+
+        public long PullPushKbn { get; set; }
     }
 }

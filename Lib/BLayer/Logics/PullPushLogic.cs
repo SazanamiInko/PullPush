@@ -99,7 +99,7 @@ namespace BLayer.Logics
             try
             {
 
-                ret.AddRange( this.pContext.TPulPushes.GroupJoin
+                ret.AddRange(this.pContext.TPulPushes.GroupJoin
                                     (
                                     this.pContext.MSubjects,
                                     pullpush => pullpush.Subject,
@@ -113,13 +113,16 @@ namespace BLayer.Logics
                                         Year = Util.ConvertNullable(record.pullpush.Year),
                                         Month = Util.ConvertNullable(record.pullpush.Month),
                                         Day = Util.ConvertNullable(record.pullpush.Day),
-                                        Content = record.pullpush.Content,
+                                        Content =  record.pullpush.Content,
                                         Subject = Util.ConvertNullable(record.pullpush.Subject),
-                                        SubjectName=subject==null?"未分類":subject.Name,
-                                        Pull=Util.ConvertNullable(record.pullpush.Pull),
-                                        Push=Util.ConvertNullable(record.pullpush.Push)
+                                        SubjectName = subject == null ? "未分類" : subject.Name,
+                                        Pull = Util.ConvertNullable(record.pullpush.Pull),
+                                        Push = Util.ConvertNullable(record.pullpush.Push),
+                                        PullPushKbn = Util.ConvertNullable(record.pullpush.Pull) == 0 ?
+                                                     Consts.Kbn.PullPushKbn.PUSH :
+                                                     Consts.Kbn.PullPushKbn.PULL
                                     })
-                                    ); 
+                                    ); ;
                 
                    
                 

@@ -41,5 +41,14 @@ namespace Common
         {
             return source.HasValue ? source.Value : 0;
         }
+        /// <summary>
+        /// NULLは空文字に変換
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static string ConertString(string source)
+        {
+            return string.IsNullOrEmpty(source)?string.Empty:source; ;
+        }
     }
 }
