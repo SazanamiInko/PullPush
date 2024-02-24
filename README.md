@@ -18,3 +18,12 @@ DLayer=>データ層(Entity.Framework)
 
 B0002=>UFJ銀行ファイル取り込みバッチ
 B0003=>UFJ自動仕分けバッチ
+
+画面
+引出預入一覧画面
+![image](https://github.com/SazanamiInko/PullPush/assets/144433203/e433cba2-dbc3-4fa3-a972-77db44d4e090)
+科目登録
+![image](https://github.com/SazanamiInko/PullPush/assets/144433203/46625aa9-4de5-445d-93c5-b51b73c5e4a2)
+取引科目紐づけルール登録
+![image](https://github.com/SazanamiInko/PullPush/assets/144433203/345fc04c-09e1-4c7b-9166-1b78ac97a532)
+
