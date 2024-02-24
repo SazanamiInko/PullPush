@@ -11,10 +11,10 @@ public partial class PullPushListPage : ContentPage
 		BindingContext = ViewModel = viewModel;
 	}
 
-	protected override async void OnNavigatedTo(NavigatedToEventArgs args)
+	protected override  void OnNavigatedTo(NavigatedToEventArgs args)
 	{
 		base.OnNavigatedTo(args);
 
-		await ViewModel.LoadDataAsync();
+		ViewModel.LoadDataAsync();
 	}
 }

@@ -26,10 +26,20 @@ namespace Common
         /// <summary>
         /// プロセス名の取得
         /// </summary>
-        /// <returns></returns>
+        /// <returns>プロセス名  </returns>
         public static string GetAppName()
         {
             return Process.GetCurrentProcess().ProcessName;
+        }
+
+        /// <summary>
+        /// NULL許容型を変換
+        /// </summary>
+        /// <param name="source"></param>
+        /// <returns></returns>
+        public static long ConvertNullable(long? source)
+        {
+            return source.HasValue ? source.Value : 0;
         }
     }
 }

@@ -45,13 +45,13 @@
 		Route="PullPushEditPage" />
 	<ShellContent
 		Shell.NavBarIsVisible="true"
-		Title="入出金データ追加"
+		Title="引出預入登録"
 		Icon="iconblank.png"
 		ContentTemplate="{DataTemplate views:PullPushAddPage}"
 		Route="PullPushAddPage" />
 	<ShellContent
 		Shell.NavBarIsVisible="true"
-		Title="入出金データ一覧"
+		Title="引出預入一覧画面"
 		Icon="iconlistdetail.png"
 		ContentTemplate="{DataTemplate views:PullPushListPage}"
 		Route="PullPushListPage" />

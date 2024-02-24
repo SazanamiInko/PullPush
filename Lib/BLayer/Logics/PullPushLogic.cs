@@ -1,6 +1,9 @@
 ﻿using AutoMapper;
+using BLayer.DataModels;
+using Common;
 using DLayer.Models;
 using Interfaces.DataModel;
+using NLog.Targets;
 
 namespace BLayer.Logics
 {
@@ -75,7 +78,54 @@ namespace BLayer.Logics
             {
                 var target = this.pContext.TPulPushes.Where(record => record.Id == id)
                                .FirstOrDefault();
-                return map.Map<IPullPush>(target); ;
+                return map.Map<IPullPush>(target); 
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public List<IPullPushView> GetPullPushs()
+        {
+            List<IPullPushView> ret = new List<IPullPushView>();
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<TPulPush, PullPushViewDataMosel>(); });
+            Mapper map = new Mapper(config);
+            try
+            {
+
+                ret.AddRange( this.pContext.TPulPushes.GroupJoin
+                                    (
+                                    this.pContext.MSubjects,
+                                    pullpush => pullpush.Subject,
+                                    subject => subject.Id,
+                                    (pullpush, subject) =>
+                                    new { pullpush, subject })
+                                    .SelectMany(record => record.subject.DefaultIfEmpty(), (record, subject) =>
+                                    new PullPushViewDataMosel()
+                                    {
+                                        Id = record.pullpush.Id,
+                                        Year = Util.ConvertNullable(record.pullpush.Year),
+                                        Month = Util.ConvertNullable(record.pullpush.Month),
+                                        Day = Util.ConvertNullable(record.pullpush.Day),
+                                        Content = record.pullpush.Content,
+                                        Subject = Util.ConvertNullable(record.pullpush.Subject),
+                                        SubjectName=subject==null?"未分類":subject.Name,
+                                        Pull=Util.ConvertNullable(record.pullpush.Pull),
+                                        Push=Util.ConvertNullable(record.pullpush.Push)
+                                    })
+                                    ); 
+                
+                   
+                
+
+
+                return ret;
             }
             catch (Exception)
             {

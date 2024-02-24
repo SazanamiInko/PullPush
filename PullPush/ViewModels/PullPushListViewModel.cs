@@ -1,59 +1,115 @@
-﻿using Common;
+﻿using AutoMapper;
+using Common;
+using FLayer.APIs;
+using FLayer.Responses;
+using Interfaces.DataModel;
 
 namespace PullPush.ViewModels;
 
 public partial class PullPushListViewModel : BaseViewModel
 {
-	readonly SampleDataService dataService;
+    #region 即時プロパティ
 
-	[ObservableProperty]
-	bool isRefreshing;
+    [ObservableProperty]
+    bool isRefreshing;
 
-	[ObservableProperty]
-	ObservableCollection<SampleItem> items;
+    [ObservableProperty]
+    ObservableCollection<IPullPushView> items;
 
-	public PullPushListViewModel(SampleDataService service,LoggingService logging):base(logging)
-	{
-		dataService = service;
-	}
+    #endregion
 
-	[RelayCommand]
-	private async void OnRefreshing()
-	{
-		IsRefreshing = true;
+    #region コンストラクタ
 
-		try
-		{
-			await LoadDataAsync();
-		}
-		finally
-		{
-			IsRefreshing = false;
-		}
-	}
+	/// <summary>
+	/// コンストラクタ
+	/// </summary>
+	/// <param name="logging"></param>
+    public PullPushListViewModel(LoggingService logging) : base(logging)
+    {
+        this.Items = new ObservableCollection<IPullPushView>();
+    }
 
-	[RelayCommand]
-	public async Task LoadMore()
-	{
-		var items = await dataService.GetItems();
+    #endregion
 
-		foreach (var item in items)
-		{
-			Items.Add(item);
-		}
-	}
+    #region イベント
 
-	public async Task LoadDataAsync()
-	{
-		Items = new ObservableCollection<SampleItem>(await dataService.GetItems());
-	}
+    /// <summary>
+    /// 再表示
+    /// </summary>
+    [RelayCommand]
+    private async void OnRefreshing()
+    {
+        IsRefreshing = true;
 
-	[RelayCommand]
-	private async void GoToDetails(SampleItem item)
-	{
-		await Shell.Current.GoToAsync(nameof(PullPushListDetailPage), true, new Dictionary<string, object>
-		{
-			{ "Item", item }
-		});
-	}
+        try
+        {
+            LoadDataAsync();
+        }
+        finally
+        {
+            IsRefreshing = false;
+        }
+    }
+
+    /// <summary>
+    /// もっと読む
+    /// </summary>
+    [RelayCommand]
+    public void LoadMore()
+    {
+
+        this.SetData();
+    }
+
+    /// <summary>
+    /// データ読み込み
+    /// </summary>
+    public void LoadDataAsync()
+    {
+        this.SetData();
+    }
+
+    /// <summary>
+    /// 詳細表示移動
+    /// </summary>
+    /// <param name="item">詳細表示</param>
+    [RelayCommand]
+    private async void GoToDetails(SampleItem item)
+    {
+        await Shell.Current.GoToAsync(nameof(PullPushListDetailPage), true, new Dictionary<string, object>
+        {
+            { "Item", item }
+        });
+    }
+
+    #endregion
+
+    #region 処理
+   /// <summary>
+   /// データセット
+   /// </summary>
+    private void SetData()
+    {
+        var res = API.GetPullPush();
+        if (res == null)
+        {
+            return;
+        }
+
+        if (res is PullPushResponse)
+        {
+            PullPushResponse resp = res as PullPushResponse;
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<IPullPushView, PullPushViewVuewDataModel>(); });
+            Mapper map = new Mapper(config);
+            foreach (var item in resp.Items)
+            {
+
+                Items.Add(map.Map<PullPushViewVuewDataModel>(item));
+            }
+
+        }
+    }
+    #endregion
+
+
 }

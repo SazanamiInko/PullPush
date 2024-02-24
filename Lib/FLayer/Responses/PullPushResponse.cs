@@ -8,27 +8,24 @@ using System.Threading.Tasks;
 namespace FLayer.Responses
 {
     /// <summary>
-    /// 科目応答
+    /// 引出預入レスポンス
     /// </summary>
-    public class SubjectResponse : BaseResponse
+    public class PullPushResponse : BaseResponse
     {
-        #region コンストラクタ
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
-        public SubjectResponse() 
-        {
-            Items = new List<ISubject>();
-        }
 
-        #endregion
+        public PullPushResponse() 
+        {
+            this.Items = new List<IPullPushView>();
+        }
 
         #region プロパティ
         /// <summary>
         /// 科目一覧
         /// </summary>
-        public List<ISubject> Items { get; }
+        public List<IPullPushView> Items { get; }
         #endregion
 
     }

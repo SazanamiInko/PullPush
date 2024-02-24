@@ -14,7 +14,7 @@ namespace FLayer.APIs
     /// <summary>
     /// API
     /// </summary>
-    public  class API
+    public class API
     {
         #region メンバー
 
@@ -63,7 +63,7 @@ namespace FLayer.APIs
             renkeiLogic.Context = context;
             pullPushLogic = new PullPushLogic();
             pullPushLogic.Context = context;
-            subjectLogic=new SubjectLogic();
+            subjectLogic = new SubjectLogic();
             subjectLogic.Context = context;
             subontentLogic = new SubContentLogic();
             subontentLogic.Context = context;
@@ -88,7 +88,7 @@ namespace FLayer.APIs
         /// <returns></returns>
         public static IResponse LoadMituiFile()
         {
-            LoadMituiResponse res =new LoadMituiResponse();
+            LoadMituiResponse res = new LoadMituiResponse();
             logging.WriteLog(() =>
             {
                 try
@@ -102,17 +102,17 @@ namespace FLayer.APIs
                 }
             });
             return res;
-         }
+        }
 
-       /// <summary>
-       /// 引出預入登録
-       /// </summary>
-       /// <param name="pullPushs"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// 引出預入登録
+        /// </summary>
+        /// <param name="pullPushs"></param>
+        /// <returns></returns>
         public static IResponse AddPullPush(List<IPullPush> pullPushs)
         {
             CommonResponse res = new CommonResponse();
-            logging.WriteLog(()=>
+            logging.WriteLog(() =>
             {
                 try
                 {
@@ -125,7 +125,7 @@ namespace FLayer.APIs
                 }
             });
             return res;
-           
+
         }
 
         /// <summary>
@@ -164,9 +164,9 @@ namespace FLayer.APIs
             {
                 try
                 {
-                   var items= subjectLogic.GetSubjectList();
+                    var items = subjectLogic.GetSubjectList();
 
-                    items.ForEach(record =>res.Items.Add(record));
+                    items.ForEach(record => res.Items.Add(record));
                 }
                 catch (Exception ex)
                 {
@@ -200,6 +200,30 @@ namespace FLayer.APIs
             });
             return res;
         }
-            #endregion
+
+        public static IResponse GetPullPush()
+        {
+            PullPushResponse res = new PullPushResponse();
+            logging.WriteLog(() =>
+            {
+                try
+                {
+                    var items=pullPushLogic.GetPullPushs();
+                    res.Items.AddRange(items);
+
+                }
+                catch (Exception ex)
+                {
+                    logging.writeLog(ex);
+                    res.SetMessage(ex);
+                }
+
+            });
+
+            return res;
         }
+    }
+    #endregion
 }
+
+   
