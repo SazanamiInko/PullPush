@@ -5,9 +5,21 @@
 			 x:Class="PullPush.Views.PullPushListDetailPage"
 			 x:DataType="vm:PullPushListDetailViewModel">
 	<ScrollView>
-		<VerticalStackLayout Margin="12">
-			<Label Text="{Binding Item.Content}" FontSize="Header" />
-			
-		</VerticalStackLayout>
+        <VerticalStackLayout Margin="12">
+            <HorizontalStackLayout>
+                <Label Text="{Binding Item.Year}"/>
+                <Label Text="/"/>
+                <Label Text="{Binding Item.Month}"/>
+                <Label Text="/"/>
+                <Label Text="{Binding Item.Day}"/>
+            </HorizontalStackLayout>
+                <Label Text="{Binding Item.Content}" />
+            <HorizontalStackLayout>
+                <Label Text="↓"/>
+                <Label Text="{Binding Item.Pull}"/>
+                <Label Text="↑"/>
+                <Label Text="{Binding Item.Push}"/>
+            </HorizontalStackLayout>
+        </VerticalStackLayout>
 	</ScrollView>
 </ContentPage>

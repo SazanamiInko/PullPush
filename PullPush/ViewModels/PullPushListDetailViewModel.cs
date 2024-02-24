@@ -9,6 +9,10 @@ public partial class PullPushListDetailViewModel : BaseViewModel
     PullPushViewVuewDataModel item;
 
     #region コンストラクタ
+    /// <summary>
+    /// コンストラクタ
+    /// </summary>
+    /// <param name="logging">ロギング</param>
     public PullPushListDetailViewModel(LoggingService logging) : base(logging)
     {
     }

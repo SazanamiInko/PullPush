@@ -5,12 +5,12 @@
 			 xmlns:m="clr-namespace:PullPush.Models"
 			 x:Class="PullPush.Views.PullPushListPage"
 			 x:DataType="vm:PullPushListViewModel">
-    <RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshingCommand}">
-        <CollectionView ItemsSource="{Binding Items}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
+	<RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshingCommand}">
+		<CollectionView ItemsSource="{Binding Items}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
 			<CollectionView.ItemTemplate>
                 <DataTemplate x:DataType="m:PullPushViewVuewDataModel">
-                    <Frame Margin="4" Padding="12">
-                        <Frame.GestureRecognizers>
+					<Frame Margin="4" Padding="12">
+						<Frame.GestureRecognizers>
 							<TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:PullPushListViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
 					    </Frame.GestureRecognizers>
 
