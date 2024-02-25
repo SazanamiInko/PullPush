@@ -9,7 +9,7 @@ public partial class MSubject
 
     public string? Name { get; set; }
 
-    public long? PullFlg { get; set; }
+    public long? PullPushKbn { get; set; }
 
     public long? TaxTargetFlg { get; set; }
 

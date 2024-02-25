@@ -4,7 +4,6 @@ using FLayer.APIs;
 using FLayer.Responses;
 using Interfaces.DataModel;
 using Interfaces.Response;
-using Microsoft.EntityFrameworkCore.Query;
 
 namespace PullPush.ViewModels;
 

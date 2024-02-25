@@ -201,6 +201,10 @@ namespace FLayer.APIs
             return res;
         }
 
+        /// <summary>
+        /// 一覧取得
+        /// </summary>
+        /// <returns></returns>
         public static IResponse GetPullPush()
         {
             PullPushResponse res = new PullPushResponse();
@@ -218,6 +222,37 @@ namespace FLayer.APIs
                     res.SetMessage(ex);
                 }
 
+            });
+
+            return res;
+        }
+
+        /// <summary>
+        /// 科目一覧取得
+        /// </summary>
+        /// <param name="kbn">引出預入区分</param>
+        /// <param name="addMisentaku">未選択を追加しない場合はfalse</param>
+        /// <returns></returns>
+        public static IResponse GetSubjectsByKbn(long kbn,bool addMisentaku=true)
+        {
+            SubjectResponse res = new SubjectResponse();
+            logging.WriteLog(() =>
+            {
+                try
+                {
+                    var items = subjectLogic.GetSubjectList(kbn);
+
+                    if(addMisentaku)
+                    {
+                        res.Items.Add(subjectLogic.CreateMisentaku());                    
+                    }
+
+                    items.ForEach(record => res.Items.Add(record));
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
             });
 
             return res;

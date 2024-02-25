@@ -49,8 +49,11 @@
              </HorizontalStackLayout>
 
 
-            <Picker></Picker>
-            
+            <Picker ItemsSource="{Binding Subjects}"
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedItem="{Binding SelctedSubhect}"
+                    />
+
         </VerticalStackLayout>
 	</ScrollView>
 </ContentPage>

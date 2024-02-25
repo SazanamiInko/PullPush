@@ -3,13 +3,6 @@ using BLayer.DataModels;
 using Common;
 using DLayer.Models;
 using Interfaces.DataModel;
-using Interfaces.Logic;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLayer.Logics
 {
@@ -64,7 +57,8 @@ namespace BLayer.Logics
             Mapper map = new Mapper(config);
             try
             {
-                pContext.MSubjects.ToList().ForEach
+                pContext.MSubjects.Where(record => record.DeleteFlg != 0)
+                    .ToList().ForEach
                     (record =>
                     {
                         var item = map.Map<SubjectDataModel>(record);
@@ -79,6 +73,51 @@ namespace BLayer.Logics
                 throw;
             }
         }
+
+        /// <summary>
+        /// 区分別科目一覧取得
+        /// </summary>
+        /// <param name="kbn"></param>
+        /// <returns></returns>
+        public List<ISubject> GetSubjectList(long kbn)
+        {
+            List<ISubject> ret = new List<ISubject>();
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<MSubject, SubjectDataModel>(); });
+            Mapper map = new Mapper(config);
+            try
+            {
+                pContext.MSubjects.Where(record=>record.PullPushKbn == kbn)
+                    .Where(record=>record.DeleteFlg!=0)
+                    .ToList().ForEach
+                    (record =>
+                    {
+                        var item = map.Map<SubjectDataModel>(record);
+
+                        ret.Add(item);
+                    });
+                return ret;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
+        /// <summary>
+        /// 未選択オブジェクトの作成
+        /// </summary>
+        /// <returns>未選択オブジェクト</returns>
+        public ISubject CreateMisentaku() 
+        {
+            return new SubjectDataModel()
+            { 
+                Id=0,
+                Name="未選択"
+            };
+        }
+
         //科目の削除
     }
 }
