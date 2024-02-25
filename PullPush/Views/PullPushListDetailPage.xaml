@@ -6,6 +6,13 @@
 			 x:DataType="vm:PullPushListDetailViewModel">
 	<ScrollView>
         <VerticalStackLayout Margin="12">
+            <VerticalStackLayout.Resources>
+                <Style TargetType="Label">
+                    <Style.Setters>
+                        <Setter Property="FontSize" Value="Body"/>
+                    </Style.Setters>
+                </Style>
+            </VerticalStackLayout.Resources>
             <HorizontalStackLayout>
                 <Label Text="{Binding Item.Year}"/>
                 <Label Text="/"/>
@@ -13,13 +20,37 @@
                 <Label Text="/"/>
                 <Label Text="{Binding Item.Day}"/>
             </HorizontalStackLayout>
-                <Label Text="{Binding Item.Content}" />
+                <Label Text="{Binding Item.Content}"
+                             FontSize="Header"/>
+            
             <HorizontalStackLayout>
-                <Label Text="↓"/>
-                <Label Text="{Binding Item.Pull}"/>
-                <Label Text="↑"/>
-                <Label Text="{Binding Item.Push}"/>
-            </HorizontalStackLayout>
+                <HorizontalStackLayout.Triggers>
+                    <DataTrigger TargetType="HorizontalStackLayout" 
+                                 Binding="{Binding Item.PullPushKbn}"
+                                 Value="1">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </HorizontalStackLayout.Triggers>
+                <Label Text="↓" TextColor="Red" FontSize="Large"/>
+                <Label Text="{Binding Item.Pull}" TextColor="Red" FontSize="Large"/>
+             </HorizontalStackLayout>
+
+             <HorizontalStackLayout >
+                <HorizontalStackLayout.Triggers>
+                    <DataTrigger TargetType="HorizontalStackLayout" 
+                                 Binding="{Binding Item.PullPushKbn}"
+                                 Value="0">
+                        <Setter Property="IsVisible" Value="false"/>
+                    </DataTrigger>
+                </HorizontalStackLayout.Triggers>
+
+                <Label Text="↑"  FontSize="Large"/>
+                <Label Text="{Binding Item.Push}"  FontSize="Large"/>
+             </HorizontalStackLayout>
+
+
+            <Picker></Picker>
+            
         </VerticalStackLayout>
 	</ScrollView>
 </ContentPage>

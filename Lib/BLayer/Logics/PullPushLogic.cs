@@ -88,7 +88,7 @@ namespace BLayer.Logics
         }
 
         /// <summary>
-        /// 
+        /// 引出預入情報取得
         /// </summary>
         /// <returns></returns>
         public List<IPullPushView> GetPullPushs()

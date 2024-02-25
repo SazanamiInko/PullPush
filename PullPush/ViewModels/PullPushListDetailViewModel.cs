@@ -5,8 +5,17 @@ namespace PullPush.ViewModels;
 [QueryProperty(nameof(Item), "Item")]
 public partial class PullPushListDetailViewModel : BaseViewModel
 {
-	[ObservableProperty]
+    #region 即時プロパティ
+
+    /// <summary>
+    /// 表示対象
+    /// </summary>
+    [ObservableProperty]
     PullPushViewVuewDataModel item;
+
+
+    #endregion
+
 
     #region コンストラクタ
     /// <summary>
