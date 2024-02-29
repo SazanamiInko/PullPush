@@ -65,5 +65,10 @@ namespace BLayer.DataModels
         /// 銀行
         /// </summary>
         public long Bank { get; set; }
+
+        /// <summary>
+        /// 紐づけたルール
+        /// </summary>
+        public long Rule { get; set; }
     }
 }

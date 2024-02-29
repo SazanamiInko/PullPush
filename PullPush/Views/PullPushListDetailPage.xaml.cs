@@ -1,6 +1,6 @@
 ﻿namespace PullPush.Views;
 
-public partial class PullPushListDetailPage : ContentPage
+public partial class PullPushListDetailPage : BaseViewClass
 {
 	public PullPushListDetailPage(PullPushListDetailViewModel viewModel)
 	{

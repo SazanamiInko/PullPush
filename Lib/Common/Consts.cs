@@ -118,6 +118,22 @@
                 /// </summary>
                 public const int OUT = 0;
             }
+
+            /// <summary>
+            /// ルール区分
+            /// </summary>
+            public static class RuleKbn
+            {
+                /// <summary>
+                /// 未分類
+                /// </summary>
+                public const int MIBUNRUI = -1;
+
+                /// <summary>
+                /// 手動
+                /// </summary>
+                public const int MANUAL = 0;
+            }
         }
     }
 }

@@ -54,6 +54,7 @@ public partial class PullPushContext : DbContext
             entity.Property(e => e.FromBank).HasDefaultValueSql("'false'");
             entity.Property(e => e.Pull).HasDefaultValueSql("'0'");
             entity.Property(e => e.Push).HasDefaultValueSql("'0'");
+            entity.Property(e => e.Rule).HasDefaultValueSql("'-1'");
         });
 
         modelBuilder.Entity<TSubContent>(entity =>

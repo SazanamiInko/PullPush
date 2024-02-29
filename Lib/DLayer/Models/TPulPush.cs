@@ -28,4 +28,6 @@ public partial class TPulPush
     public long? FromBank { get; set; }
 
     public long? Bank { get; set; }
+
+    public long? Rule { get; set; }
 }

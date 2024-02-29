@@ -122,12 +122,7 @@ namespace BLayer.Logics
                                                      Consts.Kbn.PullPushKbn.PUSH :
                                                      Consts.Kbn.PullPushKbn.PULL
                                     })
-                                    ); ;
-                
-                   
-                
-
-
+                                    );
                 return ret;
             }
             catch (Exception)
@@ -135,6 +130,56 @@ namespace BLayer.Logics
 
                 throw;
             }
+        }
+
+        /// <summary>
+        /// 科目更新
+        /// </summary>
+        /// <param name="id">管理番号</param>
+        /// <param name="subject">科目</param>
+        public int UpdateSubject(long id,long subject,long rule=0)
+        {
+            //科目の存在チェック
+            var subobj=pContext.MSubjects.Where(record=>record.Id==subject)
+                 .FirstOrDefault();
+
+            if(subobj==null)
+            {
+                throw new BusinessException("科目情報がありません");
+            }
+
+            //引出預入情報の存在チェック
+            var target = pContext.TPulPushes.Where(record => record.Id ==id)
+             .FirstOrDefault();
+
+            if(target==null)
+            {
+                throw new BusinessException("引出預入情報がありません");
+            }
+
+            if(Consts.Kbn.RuleKbn.MANUAL!=rule)
+            {
+                var trule=pContext.TSubContents.Where(record=>record.Id==rule)
+                    .FirstOrDefault();
+
+                if (trule == null)
+                {
+                    throw new BusinessException("紐づけ情報がありませんでした");
+                }
+            }
+
+            target.Subject = subject;
+            target.Rule = rule;
+
+            pContext.SaveChanges();
+            return 1;
+        }
+
+        public void UpdatePullPush(IPullPush pullPush)
+        {
+            var target= pContext.TPulPushes.Where(record => record.Id == pullPush.Id)
+                .FirstOrDefault();
+
         }
 
         //引き出し・預け入れ情報のラベルを変更するAPI

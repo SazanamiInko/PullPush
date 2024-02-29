@@ -44,17 +44,41 @@ public partial class PullPushListDetailViewModel : BaseViewModel
     }
     #endregion
 
+    #region イベント
+
+    [RelayCommand]
+    public void AtendSubject()
+    {
+        var res = API.SetSubject(Item.Id,
+            SelctedSubhect.Id,
+            Consts.Kbn.RuleKbn.MANUAL);
+        
+        if(res.Success)
+        {
+            this.DisplayAlert("科目を設定しました");
+        }
+        else
+        {
+            this.DisplayAlert(res.Message);
+        }
+    }
+
+    #endregion
+
     #region メソッド
 
+    /// <summary>
+    /// 科目の取得
+    /// </summary>
     public void SetSubjects()
     {
         var config = new MapperConfiguration(cfg => { cfg.CreateMap<ISubject, SubjectViewDataModel>(); });
         Mapper map = new Mapper(config);
 
-        if (item!=null)
+        if (item != null)
         {
-            var res=API.GetSubjectsByKbn(item.PullPushKbn);
-            if( res is SubjectResponse)
+            var res = API.GetSubjectsByKbn(item.PullPushKbn);
+            if (res is SubjectResponse)
             {
                 SubjectResponse response = res as SubjectResponse;
                 response.Items.ForEach
@@ -66,11 +90,8 @@ public partial class PullPushListDetailViewModel : BaseViewModel
             }
         }
 
-        SelctedSubhect = Subjects.Where(record => record.Id == item.Subject)
-            .FirstOrDefault();
+        SelctedSubhect = Subjects.FirstOrDefault(record => record.Id == item.Subject);
     }
-
-
     #endregion
-
 }
+

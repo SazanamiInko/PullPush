@@ -14,7 +14,7 @@ namespace FLayer.APIs
     /// <summary>
     /// API
     /// </summary>
-    public class API
+    public static class API
     {
         #region メンバー
 
@@ -255,6 +255,26 @@ namespace FLayer.APIs
                 }
             });
 
+            return res;
+        }
+
+        /// <summary>
+        /// 科目設定
+        /// </summary>
+        /// <param name="id">管理番号</param>
+        /// <param name="subject">科目</param>
+        /// <returns>レスポンス</returns>
+        public static IResponse SetSubject(long id, long subject,long rule)
+        {
+            CommonResponse res = new CommonResponse();
+            try
+            {
+                res.Count = pullPushLogic.UpdateSubject(id, subject, rule);
+            }
+            catch (Exception ex)
+            {
+                res.SetMessage(ex);
+            }
             return res;
         }
     }
