@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using BLayer.DataModels;
 using Common;
 using FLayer.APIs;
 using FLayer.Responses;
@@ -30,6 +31,13 @@ public partial class PullPushListDetailViewModel : BaseViewModel
     /// </summary>
     [ObservableProperty]
     SubjectViewDataModel selctedSubhect;
+
+
+    /// <summary>
+    /// ルールも保存
+    /// </summary>
+    [ObservableProperty]
+    bool isCheckRuleSaved;
     #endregion
 
 
@@ -61,6 +69,25 @@ public partial class PullPushListDetailViewModel : BaseViewModel
         {
             this.DisplayAlert(res.Message);
         }
+
+        if(IsCheckRuleSaved)
+        {
+            SubContentdataModel rule = new SubContentdataModel();
+            rule.Name = Item.Content;
+            rule.Content = Item.Content;
+            rule.Subject = SelctedSubhect.Id;
+
+           var ressub= API.AddSubContent(rule);
+
+            if (res.Success)
+            {
+                this.DisplayAlert("紐づけを設定しました");
+            }
+            else
+            {
+                this.DisplayAlert(res.Message);
+            }
+        }
     }
 
     #endregion
@@ -75,7 +102,7 @@ public partial class PullPushListDetailViewModel : BaseViewModel
         var config = new MapperConfiguration(cfg => { cfg.CreateMap<ISubject, SubjectViewDataModel>(); });
         Mapper map = new Mapper(config);
 
-        if (item != null)
+        if (Item != null)
         {
             var res = API.GetSubjectsByKbn(item.PullPushKbn);
             if (res is SubjectResponse)

@@ -178,7 +178,7 @@ namespace FLayer.APIs
         }
 
         /// <summary>
-        /// ルール紐づけの
+        /// ルール紐づけの登録
         /// </summary>
         /// <param name="subContent"></param>
         /// <returns></returns>
