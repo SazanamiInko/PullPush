@@ -1,63 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<View:BaseViewClass  xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-			 xmlns:vm="clr-namespace:PullPush.ViewModels"
-             xmlns:View="clr-namespace:PullPush.Views"
-			 x:Class="PullPush.Views.PullPushListDetailPage"
-			 x:DataType="vm:PullPushListDetailViewModel">
-	<ScrollView>
+<View:BaseViewClass
+    x:Class="PullPush.Views.PullPushListDetailPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:View="clr-namespace:PullPush.Views"
+    xmlns:vm="clr-namespace:PullPush.ViewModels"
+    x:DataType="vm:PullPushListDetailViewModel">
+    <ScrollView>
         <VerticalStackLayout Margin="12">
             <VerticalStackLayout.Resources>
                 <Style TargetType="Label">
                     <Style.Setters>
-                        <Setter Property="FontSize" Value="Body"/>
+                        <Setter Property="FontSize" Value="Body" />
                     </Style.Setters>
                 </Style>
             </VerticalStackLayout.Resources>
             <HorizontalStackLayout>
-                <Label Text="{Binding Item.Year}"/>
-                <Label Text="/"/>
-                <Label Text="{Binding Item.Month}"/>
-                <Label Text="/"/>
-                <Label Text="{Binding Item.Day}"/>
+                <Label Text="{Binding Item.Year}" />
+                <Label Text="/" />
+                <Label Text="{Binding Item.Month}" />
+                <Label Text="/" />
+                <Label Text="{Binding Item.Day}" />
             </HorizontalStackLayout>
-                <Label Text="{Binding Item.Content}"
-                             FontSize="Header"/>
-            
+            <Label FontSize="Header" Text="{Binding Item.Content}" />
+
             <HorizontalStackLayout>
                 <HorizontalStackLayout.Triggers>
-                    <DataTrigger TargetType="HorizontalStackLayout" 
-                                 Binding="{Binding Item.PullPushKbn}"
-                                 Value="1">
-                        <Setter Property="IsVisible" Value="false"/>
+                    <DataTrigger
+                        Binding="{Binding Item.PullPushKbn}"
+                        TargetType="HorizontalStackLayout"
+                        Value="1">
+                        <Setter Property="IsVisible" Value="false" />
                     </DataTrigger>
                 </HorizontalStackLayout.Triggers>
-                <Label Text="↓" TextColor="Red" FontSize="Large"/>
-                <Label Text="{Binding Item.Pull}" TextColor="Red" FontSize="Large"/>
-             </HorizontalStackLayout>
+                <Label
+                    FontSize="Large"
+                    Text="↓"
+                    TextColor="Red" />
+                <Label
+                    FontSize="Large"
+                    Text="{Binding Item.Pull, StringFormat='{0:C} 円'}"
+                    TextColor="Red" />
+            </HorizontalStackLayout>
 
-             <HorizontalStackLayout >
+            <HorizontalStackLayout>
                 <HorizontalStackLayout.Triggers>
-                    <DataTrigger TargetType="HorizontalStackLayout" 
-                                 Binding="{Binding Item.PullPushKbn}"
-                                 Value="0">
-                        <Setter Property="IsVisible" Value="false"/>
+                    <DataTrigger
+                        Binding="{Binding Item.PullPushKbn}"
+                        TargetType="HorizontalStackLayout"
+                        Value="0">
+                        <Setter Property="IsVisible" Value="false" />
                     </DataTrigger>
                 </HorizontalStackLayout.Triggers>
 
-                <Label Text="↑"  FontSize="Large"/>
-                <Label Text="{Binding Item.Push}"  FontSize="Large"/>
-             </HorizontalStackLayout>
+                <Label FontSize="Large" Text="↑" />
+                <Label FontSize="Large" Text="{Binding Item.Push, StringFormat='{0:C} 円'}" />
+            </HorizontalStackLayout>
 
 
-            <Picker ItemsSource="{Binding Subjects}"
+            <HorizontalStackLayout>
+
+                <Label FontSize="Large" Text="科目" />
+                <Picker
+                    FontSize="Large"
                     ItemDisplayBinding="{Binding Name}"
-                    SelectedItem="{Binding SelctedSubhect}"
-                    />
-            
-            <Button Text="科目を登録"
-                    Command="{Binding AtendSubjectCommand}"/>
+                    ItemsSource="{Binding Subjects}"
+                    SelectedItem="{Binding SelctedSubhect}" />
+            </HorizontalStackLayout>
+            <Button
+                Command="{Binding AtendSubjectCommand}"
+                FontSize="Large"
+                Text="科目を登録" />
 
         </VerticalStackLayout>
-	</ScrollView>
+    </ScrollView>
 </View:BaseViewClass>
