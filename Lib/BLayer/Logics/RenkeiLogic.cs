@@ -93,12 +93,18 @@ namespace BLayer.Logics
             {
                 foreach (string line in lines)
                 {
-                    string work = line.Replace("\"", "");
+
+                    
                     if (headerflg)
                     {
                         headerflg = false;
                         continue;
                     }
+
+                    string work = line.Replace(",", "")
+                                      .Replace("\"\"", ",")
+                                      .Replace("\"","");
+
 
                     //CSVを分解する
                     var records = work.Split(",");
@@ -114,9 +120,9 @@ namespace BLayer.Logics
 
 
                     //お引出し
-                    data.Pull = string.IsNullOrEmpty(records[Consts.FL.UFJ.PULL]) ? 0 : Convert.ToInt64(records[Consts.FL.MITUI.PULL]);
+                    data.Pull = string.IsNullOrEmpty(records[Consts.FL.UFJ.PULL]) ? 0 : Convert.ToInt64(records[Consts.FL.UFJ.PULL]);
                     //お預入れ
-                    data.Push = string.IsNullOrEmpty(records[Consts.FL.UFJ.PUSH]) ? 0 : Convert.ToInt64(records[Consts.FL.MITUI.PUSH]);
+                    data.Push = string.IsNullOrEmpty(records[Consts.FL.UFJ.PUSH]) ? 0 : Convert.ToInt64(records[Consts.FL.UFJ.PUSH]);
                     //取引内容
                     data.Content = records[Consts.FL.UFJ.CONTENT];
 
@@ -127,6 +133,8 @@ namespace BLayer.Logics
                     data.FromBank = Consts.Kbn.FromBankKbn.FromBank;
                     //銀行
                     data.Bank = Consts.Kbn.Bank.UFJ;
+
+                    ret.Add(data);
                 }
             }
             catch

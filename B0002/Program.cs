@@ -17,7 +17,7 @@ try
     logging.WriteLog("Start");
 
     //UFJ銀行ファイルを読み込む
-    var response = API.LoadMituiFile();
+    var response = API.LoadUFJFile();
     ;
     //失敗したら終わり
     if (!response.Success)
@@ -25,9 +25,9 @@ try
         throw new BusinessException(response.Message);
     }
 
-    if (response is LoadMituiResponse)
+    if (response is LoadUFJResponse)
     {
-        LoadMituiResponse res = (LoadMituiResponse)response;
+        LoadUFJResponse res = (LoadUFJResponse)response;
 
         //PullPushに登録
         var addresponse = API.AddPullPush(res.PullPushes);
