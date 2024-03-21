@@ -10,7 +10,16 @@
         /// </summary>
         public static class Paths
         {
+            /// <summary>
+            /// 三井銀行ファイルパス
+            /// </summary>
             public const string MITUIFILE = @"C:\Users\Public\Documents\Data\PullPush\mitui.csv";
+
+            /// <summary>
+            /// UFJファイル
+            /// </summary>
+            public const string UFJFILE = @"C:\Users\Public\Documents\Data\PullPush\UFJ.csv";
+        
         }
 
         /// <summary>
@@ -58,6 +67,58 @@
                 /// </summary>
                 public const int LABEL = 6;
             }
+
+            /// <summary>
+            /// UFJダウンロードファイルレイアウト
+            /// </summary>
+            public static class UFJ
+            {
+                /// <summary>
+                /// 年月日 
+                /// </summary>
+                public const int DATE = 0;
+
+                /// <summary>
+                /// タイトル
+                /// </summary>
+                public const int TITLE = 1;
+                /// <summary>
+                /// 内容
+                /// </summary>
+                public const int CONTENT = 2;
+
+                /// <summary>
+                /// 引出し
+                /// </summary>
+                public const int PULL = 3;
+
+                /// <summary>
+                /// 預入れ
+                /// </summary>
+                public const int PUSH = 4;
+
+
+                /// <summary>
+                /// 残高
+                /// </summary>
+                public const int REMAIN = 5;
+
+
+                /// <summary>
+                /// メモ
+                /// </summary>
+                public const int MEMO = 6;
+
+                /// <summary>
+                /// 区分
+                /// </summary>
+                public const int KBN1 = 7;
+
+                /// <summary>
+                /// 区分
+                /// </summary>
+                public const int KBN2 = 8;
+            }
         }
 
         /// <summary>
@@ -85,6 +146,11 @@
                 /// 三井住友銀行
                 /// </summary>
                 public const int MITUI = 1;
+
+                /// <summary>
+                /// UFJ銀行
+                /// </summary>
+                public const int UFJ = 2;
             }
 
             /// <summary>

@@ -104,6 +104,24 @@ namespace FLayer.APIs
             return res;
         }
 
+        public static IResponse LoadUFJFile()
+        {
+            LoadUFJResponse res = new LoadUFJResponse();
+            logging.WriteLog(() =>
+            {
+                try
+                {
+                    var pullpushes = renkeiLogic.LoadUFJFile();
+                    res.PullPushes.AddRange(pullpushes);
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
+            });
+            return res;
+        }
+
         /// <summary>
         /// 引出預入登録
         /// </summary>
