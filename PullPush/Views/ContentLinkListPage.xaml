@@ -8,12 +8,28 @@
 	<RefreshView IsRefreshing="{Binding IsRefreshing}" Command="{Binding RefreshingCommand}">
 		<CollectionView ItemsSource="{Binding Items}" RemainingItemsThreshold="10" RemainingItemsThresholdReachedCommand="{Binding LoadMoreCommand}">
 			<CollectionView.ItemTemplate>
-				<DataTemplate x:DataType="m:SampleItem">
+                <DataTemplate x:DataType="m:SubContebtViewViewDataModel">
 					<Frame Margin="4" Padding="12">
 						<Frame.GestureRecognizers>
 							<TapGestureRecognizer Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ContentLinkListViewModel}}, Path=GoToDetailsCommand}" CommandParameter="{Binding .}" />
 						</Frame.GestureRecognizers>
-						<Label Text="{Binding Title}" FontSize="Large" TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+
+                            <VerticalStackLayout Grid.Column="0">
+                                <Label Text="{Binding Name}"/>
+                                <Label Text="{Binding Content}"/>
+                            </VerticalStackLayout>
+
+                            <VerticalStackLayout Grid.Column="1">
+                                <Label Text="{Binding SubjectName}"/>
+                            </VerticalStackLayout>
+                            
+                        </Grid>
+                        
 					</Frame>
 				</DataTemplate>
 			</CollectionView.ItemTemplate>

@@ -3,11 +3,7 @@ using BLayer.DataModels;
 using Common;
 using DLayer.Models;
 using Interfaces.DataModel;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Data.Common;
 
 namespace BLayer.Logics
 {
@@ -58,6 +54,47 @@ namespace BLayer.Logics
                 throw;
             }
 
+        }
+
+        /// <summary>
+        /// 取引科目紐づけルール
+        /// </summary>
+        /// <returns></returns>
+        public List<ISubContentView> GetSubContent()
+        {
+            List<ISubContentView> ret = new List<ISubContentView>();
+
+            try
+            {
+                ret.AddRange(
+                                 pContext.TSubContents.Where(record => record.Delete != Consts.Kbn.DeleteKbn.DELETED).ToList()
+                                 .GroupJoin
+                                    (
+                                        this.pContext.MSubjects,
+                                        subcontent => subcontent.Subject,
+                                        subject => subject.Id,
+                                        (subcontent, subject) => new { subcontent, subject })
+                                    .SelectMany
+                                     (
+                                        record => record.subject.DefaultIfEmpty(),
+                                        (record, subject) => new SubContentViewDataModel()
+                                        {
+                                            Id = record.subcontent.Id,
+                                            Name=string.IsNullOrEmpty(record.subcontent.Name)?"": record.subcontent.Name,
+                                            Content= string.IsNullOrEmpty(record.subcontent.Content)?"": record.subcontent.Content,
+                                            Subject=record.subcontent.Subject.HasValue?record.subcontent.Subject.Value:0,
+                                            SubjectName =string.IsNullOrEmpty(subject.Name)?"": subject.Name,
+                                            Delete =record.subcontent.Delete.HasValue? record.subcontent.Delete.Value:0
+                                        })); 
+                
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+            return ret;
         }
     }
 }

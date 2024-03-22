@@ -101,13 +101,14 @@ namespace BLayer.Logics
 
                 ret.AddRange(this.pContext.TPulPushes.GroupJoin
                                     (
-                                    this.pContext.MSubjects,
-                                    pullpush => pullpush.Subject,
-                                    subject => subject.Id,
-                                    (pullpush, subject) =>
-                                    new { pullpush, subject })
-                                    .SelectMany(record => record.subject.DefaultIfEmpty(), (record, subject) =>
-                                    new PullPushViewDataMosel()
+                                        this.pContext.MSubjects,
+                                        pullpush => pullpush.Subject,
+                                        subject => subject.Id,
+                                        (pullpush, subject) =>new { pullpush, subject })
+                                    .SelectMany
+                                    (
+                                        record => record.subject.DefaultIfEmpty(), 
+                                        (record, subject) =>new PullPushViewDataMosel()
                                     {
                                         Id = record.pullpush.Id,
                                         Year = Util.ConvertNullable(record.pullpush.Year),

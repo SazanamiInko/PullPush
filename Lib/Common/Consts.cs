@@ -200,6 +200,17 @@
                 /// </summary>
                 public const int MANUAL = 0;
             }
+
+            /// <summary>
+            /// 削除フラグ
+            /// </summary>
+            public static class DeleteKbn
+            {
+                /// <summary>
+                /// 削除済み
+                /// </summary>
+                public const int DELETED = 1;
+            }
         }
     }
 }

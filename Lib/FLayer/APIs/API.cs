@@ -104,6 +104,10 @@ namespace FLayer.APIs
             return res;
         }
 
+        /// <summary>
+        /// UFJファイルの読み込み」
+        /// </summary>
+        /// <returns></returns>
         public static IResponse LoadUFJFile()
         {
             LoadUFJResponse res = new LoadUFJResponse();
@@ -293,6 +297,28 @@ namespace FLayer.APIs
             {
                 res.SetMessage(ex);
             }
+            return res;
+        }
+
+        /// <summary>
+        /// 紐づけルール一覧取得
+        /// </summary>
+        /// <returns>レスポンス</returns>
+        public static IResponse GetSubContent()
+        {
+            SubContentsResponse res = new SubContentsResponse();
+            try
+            {
+               var items= subontentLogic.GetSubContent();
+
+                items.ForEach(record => res.Items.Add(record));
+                
+            }
+            catch (Exception ex)
+            {
+                res.SetMessage(ex);
+            }
+
             return res;
         }
     }
