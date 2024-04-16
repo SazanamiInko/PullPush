@@ -6,7 +6,7 @@ namespace PullPush.ViewModels;
 public partial class ContentLinkListDetailViewModel : BaseViewModel
 {
 	[ObservableProperty]
-	SampleItem item;
+    SubContebtViewViewDataModel item;
 
     #region MyRegion
     /// <summary>

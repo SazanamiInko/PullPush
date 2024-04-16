@@ -64,9 +64,12 @@ public partial class ContentLinkListViewModel : BaseViewModel
     }
 
   
-
+    /// <summary>
+    /// 画面遷移
+    /// </summary>
+    /// <param name="item"></param>
     [RelayCommand]
-    private async void GoToDetails(SampleItem item)
+    private async void GoToDetails(SubContebtViewViewDataModel item)
     {
         await Shell.Current.GoToAsync(nameof(ContentLinkListDetailPage), true, new Dictionary<string, object>
         {
