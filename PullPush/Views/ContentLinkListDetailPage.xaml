@@ -4,15 +4,71 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:vm="clr-namespace:PullPush.ViewModels"
-    x:DataType="vm:ContentLinkListDetailViewModel">
+    x:DataType="vm:ContentLinkListDetailViewModel"
+    Title="紐づけルール詳細編集画面">
     <ScrollView>
-        <VerticalStackLayout Margin="12" >
-            <Entry Placeholder="ルール名"
-               Text="{Binding Item.Name}"/>
+        <Grid Margin="12">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+                <RowDefinition Height="auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
 
-            <Entry Placeholder="含む取引名"
-               Text="{Binding Item.Content}"/>
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                FontSize="Large"
+                Text="ルール名" />
 
-        </VerticalStackLayout>
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                Margin="5"
+                FontSize="Large"
+                Text="{Binding Item.Name}" />
+
+            <Label
+                Grid.Row="1"
+                Grid.Column="0"
+                FontSize="Large"
+                Text="含む取引名" />
+
+            <Entry
+                Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                FontSize="Large"
+                Text="{Binding Item.Content}" />
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                FontSize="Large"
+                Text="科目" />
+
+            <Picker
+                Grid.Row="2"
+                Grid.Column="1"
+                Margin="5"
+                FontSize="Large"
+                ItemDisplayBinding="{Binding Name}"
+                ItemsSource="{Binding Subjects}"
+                SelectedItem="{Binding SelctedSubhect}" />
+
+            <HorizontalStackLayout Grid.Row="3"
+                                 Grid.Column="0"
+                                 Grid.RowSpan="2">
+
+                <Button Text="更新"
+                        FontSize="Large"/>
+
+            </HorizontalStackLayout>
+
+        </Grid>
     </ScrollView>
 </ContentPage>
