@@ -38,6 +38,26 @@ public partial class ContentLinkListDetailViewModel : BaseViewModel
     }
     #endregion
 
+    #region イベント
+
+    [RelayCommand]
+    public void Edit()
+    {
+        if(string.IsNullOrEmpty(Item.Name))
+        {
+            this.DisplayAlert("ルール名が空白です");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(Item.Content))
+        {
+            this.DisplayAlert("含む取引名が空白です");
+            return;
+        }
+
+    }
+
+    #endregion
 
     #region メソッド
 
