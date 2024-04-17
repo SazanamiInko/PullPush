@@ -43,19 +43,12 @@ public partial class ContentLinkListDetailViewModel : BaseViewModel
     [RelayCommand]
     public void Edit()
     {
-        if(string.IsNullOrEmpty(Item.Name))
-        {
-            this.DisplayAlert("ルール名が空白です");
-            return;
-        }
 
-        if (string.IsNullOrEmpty(Item.Content))
-        {
-            this.DisplayAlert("含む取引名が空白です");
-            return;
-        }
-
+        DoEdit();
     }
+
+
+   
 
     #endregion
 
@@ -89,13 +82,67 @@ public partial class ContentLinkListDetailViewModel : BaseViewModel
                     this.Subjects.Add(item);
                 });
 
+                if(Item==null)
+                {
+                    return;
+                }
+
                 if (subres.Items.Count > 0)
                 {
-                    this.SelctedSubhect = this.Subjects[0];
+                    var selected = this.Subjects.Where(record => record.Id == item.Subject)
+                    .FirstOrDefault();
+                    this.SelctedSubhect = selected;
                 }
             }
         });
 
     }
-    #endregion
-}
+
+    /// <summary>
+    /// 編集
+    /// </summary>
+    public void DoEdit()
+    {
+        if (string.IsNullOrEmpty(Item.Name))
+        {
+            this.DisplayAlert("ルール名が空白です");
+            return;
+        }
+
+        if (string.IsNullOrEmpty(Item.Content))
+        {
+            this.DisplayAlert("含む取引名が空白です");
+            return;
+        }
+
+        Item.Subject = SelctedSubhect.Id;
+       var res= API.UpdateSubContent(Item);
+        if(res.Success)
+        {
+            this.DisplayAlert("紐づけルールを更新しました");
+        }
+        else
+        {
+            this.DisplayAlert(res.Message);
+        }
+    }
+
+    /// <summary>
+    /// 科目の取得
+    /// </summary>
+    public void SetSubjects()
+    {
+        if (Item == null)
+        {
+            return;
+        }
+
+        if (Subjects.Count > 0)
+        {
+            var selected = this.Subjects.Where(record => record.Id == item.Subject)
+            .FirstOrDefault();
+            this.SelctedSubhect = selected;
+        }
+    }
+        #endregion
+    }

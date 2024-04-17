@@ -1,13 +1,9 @@
 ﻿using BLayer.Logics;
-using Common;
 using DLayer.Models;
 using FLayer.Responses;
 using Interfaces.DataModel;
 using Interfaces.Response;
 using Interfaces.Service;
-using Microsoft.Extensions.Logging;
-using NLog.Config;
-using System.Runtime.CompilerServices;
 
 namespace FLayer.APIs
 {
@@ -319,6 +315,24 @@ namespace FLayer.APIs
                 res.SetMessage(ex);
             }
 
+            return res;
+        }
+
+
+        public static IResponse UpdateSubContent(ISubContent subContent)
+        {
+            CommonResponse res = new CommonResponse();
+            logging.WriteLog(() =>
+            {
+                try
+                {
+                   res.Count= subontentLogic.UpdateSubContent(subContent);
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
+            });
             return res;
         }
     }

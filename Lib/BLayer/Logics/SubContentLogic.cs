@@ -3,7 +3,6 @@ using BLayer.DataModels;
 using Common;
 using DLayer.Models;
 using Interfaces.DataModel;
-using System.Data.Common;
 
 namespace BLayer.Logics
 {
@@ -95,6 +94,108 @@ namespace BLayer.Logics
             }
 
             return ret;
+        }
+
+        /// <summary>
+        /// 取引科目紐づけ更新
+        /// </summary>
+        /// <param name="subContentdata"></param>
+        /// <returns></returns>
+        /// <exception cref="BusinessException"></exception>
+        public int UpdateSubContent(ISubContent subContentdata)
+        {
+            var config = new MapperConfiguration(cfg => { cfg.CreateMap<ISubContent, TSubContent>(); });
+            Mapper map = new Mapper(config);
+
+            //ルール名が登録済みだったらNG
+            var isName = IsTSubContentsByName(subContentdata.Name, subContentdata.Id);
+
+            if (isName)
+            {
+                throw new BusinessException("既にルール名が登録済みです");
+            }
+
+            //取引が登録済みだったらNG
+            var iscontent= IsTSubContentsByContent(subContentdata.Content, subContentdata.Id);
+            if (iscontent)
+            {
+                throw new BusinessException("既に取引が登録済みです");
+            }
+
+            var target = GetSubContentsByID(subContentdata.Id);
+            if (target==null)
+            {
+                throw new BusinessException("予期せぬエラーが発生しました");
+            }
+            map.Map(subContentdata,target);
+           
+            return pContext.SaveChanges();;
+        }
+
+        /// <summary>
+        /// ルール名検索
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private bool IsTSubContentsByName(string name, long id = -1)
+        {
+            var targetName = pContext.TSubContents.Where(record => record.Name == name);
+
+            if (targetName.Count()==0)
+            {
+                return false;
+            }
+
+           targetName = targetName.Where(record => record.Id != id);
+
+            if (targetName.Count() == 0)
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
+        /// <summary>
+        /// コンテンツ名検索
+        /// </summary>
+        /// <param name="content"></param>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private bool IsTSubContentsByContent(string content, long id = -1)
+        {
+            var targetName = pContext.TSubContents.Where(record => record.Content == content);
+
+            if (targetName.Count() == 0)
+            {
+                return false;
+            }
+
+            targetName = targetName.Where(record => record.Id != id);
+
+            if (targetName.Count() == 0)
+            {
+                return false;
+            }
+
+            return true;
+
+        }
+
+        /// <summary>
+        /// ID検索
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        private TSubContent GetSubContentsByID(long id)
+        {
+            var target = pContext.TSubContents.Where(record => record.Id == id)
+                .FirstOrDefault();
+
+            return target;
+
         }
     }
 }
