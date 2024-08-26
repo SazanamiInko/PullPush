@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BLayer.Logics
 {
-    public abstract class BasetLogic:ILogic
+    public abstract class BaseLogic:ILogic
     {
         #region メンバー
 

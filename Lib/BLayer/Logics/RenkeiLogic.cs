@@ -7,7 +7,7 @@ namespace BLayer.Logics
     /// <summary>
     /// 外部連携ロジック
     /// </summary>
-    public class RenkeiLogic : BasetLogic
+    public class RenkeiLogic : BaseLogic
     {
 
         /// <summary>

@@ -39,6 +39,10 @@ namespace FLayer.APIs
         /// </summary>
         private static SubContentLogic subontentLogic;
 
+        /// <summary>
+        /// 仕分けロジック
+        /// </summary>
+        private static GroupingLogic groupingLogic;
 
         /// <summary>
         /// ロギング
@@ -63,6 +67,8 @@ namespace FLayer.APIs
             subjectLogic.Context = context;
             subontentLogic = new SubContentLogic();
             subontentLogic.Context = context;
+            groupingLogic = new GroupingLogic();
+            groupingLogic.Context = context;
         }
 
         #endregion
@@ -101,7 +107,7 @@ namespace FLayer.APIs
         }
 
         /// <summary>
-        /// UFJファイルの読み込み」
+        /// UFJファイルの読み込み
         /// </summary>
         /// <returns></returns>
         public static IResponse LoadUFJFile()
@@ -230,7 +236,7 @@ namespace FLayer.APIs
             {
                 try
                 {
-                    var items=pullPushLogic.GetPullPushs();
+                    var items = pullPushLogic.GetPullPushs();
                     res.Items.AddRange(items);
 
                 }
@@ -251,7 +257,7 @@ namespace FLayer.APIs
         /// <param name="kbn">引出預入区分</param>
         /// <param name="addMisentaku">未選択を追加しない場合はfalse</param>
         /// <returns></returns>
-        public static IResponse GetSubjectsByKbn(long kbn,bool addMisentaku=true)
+        public static IResponse GetSubjectsByKbn(long kbn, bool addMisentaku = true)
         {
             SubjectResponse res = new SubjectResponse();
             logging.WriteLog(() =>
@@ -260,9 +266,9 @@ namespace FLayer.APIs
                 {
                     var items = subjectLogic.GetSubjectList(kbn);
 
-                    if(addMisentaku)
+                    if (addMisentaku)
                     {
-                        res.Items.Add(subjectLogic.CreateMisentaku());                    
+                        res.Items.Add(subjectLogic.CreateMisentaku());
                     }
 
                     items.ForEach(record => res.Items.Add(record));
@@ -282,7 +288,7 @@ namespace FLayer.APIs
         /// <param name="id">管理番号</param>
         /// <param name="subject">科目</param>
         /// <returns>レスポンス</returns>
-        public static IResponse SetSubject(long id, long subject,long rule)
+        public static IResponse SetSubject(long id, long subject, long rule)
         {
             CommonResponse res = new CommonResponse();
             try
@@ -305,10 +311,10 @@ namespace FLayer.APIs
             SubContentsResponse res = new SubContentsResponse();
             try
             {
-               var items= subontentLogic.GetSubContent();
+                var items = subontentLogic.GetSubContent();
 
                 items.ForEach(record => res.Items.Add(record));
-                
+
             }
             catch (Exception ex)
             {
@@ -318,7 +324,11 @@ namespace FLayer.APIs
             return res;
         }
 
-
+        /// <summary>
+        /// 紐づけルールの更新
+        /// </summary>
+        /// <param name="subContent">紐づけルール</param>
+        /// <returns></returns>
         public static IResponse UpdateSubContent(ISubContent subContent)
         {
             CommonResponse res = new CommonResponse();
@@ -326,7 +336,7 @@ namespace FLayer.APIs
             {
                 try
                 {
-                   res.Count= subontentLogic.UpdateSubContent(subContent);
+                    res.Count = subontentLogic.UpdateSubContent(subContent);
                 }
                 catch (Exception ex)
                 {
@@ -335,8 +345,30 @@ namespace FLayer.APIs
             });
             return res;
         }
+
+        /// <summary>
+        /// 仕分け
+        /// </summary>
+        /// <returns></returns>
+        public static IResponse Grouping()
+        {
+            CommonResponse res = new CommonResponse();
+            logging.WriteLog(() =>
+            {
+                try
+                {
+                    groupingLogic.grouping();
+                }
+                catch (Exception ex)
+                {
+                    res.SetMessage(ex);
+                }
+            });
+
+            return res;
+        }
+        #endregion
     }
-    #endregion
 }
 
    

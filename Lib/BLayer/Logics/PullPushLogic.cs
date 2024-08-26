@@ -10,7 +10,7 @@ namespace BLayer.Logics
     /// <summary>
     /// 引き出し・預け入れ情報
     /// </summary>
-    public class PullPushLogic:BasetLogic
+    public class PullPushLogic:BaseLogic
     {
 
         /// <summary>

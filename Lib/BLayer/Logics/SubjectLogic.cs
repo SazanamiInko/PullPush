@@ -9,7 +9,7 @@ namespace BLayer.Logics
     /// <summary>
     /// 科目ロジック
     /// </summary>
-    public class SubjectLogic : BasetLogic
+    public class SubjectLogic : BaseLogic
     {
 
         /// <summary>

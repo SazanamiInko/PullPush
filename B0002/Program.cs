@@ -3,9 +3,6 @@
 using Common;
 using FLayer.APIs;
 using FLayer.Responses;
-using Microsoft.Extensions.Logging;
-using NLog;
-using NLog.Extensions.Logging;
 
 var logging = new LoggingService();
 

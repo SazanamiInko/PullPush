@@ -9,7 +9,7 @@ namespace BLayer.Logics
     /// <summary>
     /// 取引科目紐づけルールロジック
     /// </summary>
-    public class SubContentLogic : BasetLogic
+    public class SubContentLogic : BaseLogic
     {
         /// <summary>
         /// 取引科目紐づけルールの登録
